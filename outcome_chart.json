@@ -1,0 +1,47 @@
+{
+    "bowling_cards": [
+        {"BOUNCER": "Bouncer", "probable_shots": ["PULL", "UPPERCUT"]},
+        {"INSWINGER": "Inswinger", "probable_shots": ["FLICK", "LEGLANCE"]},
+        {"OUTSWINGER": "Outswinger", "probable_shots": ["SQUARECUT"]},
+        {"LEG_CUTTER": "Leg Cutter", "probable_shots": ["LEGLANCE"]},
+        {"OFF_CUTTER": "Off Cutter", "probable_shots": ["SQUARECUT"]},
+        {"SLOWER_BALL": "Slower Ball", "probable_shots": ["SWEEP", ""]},
+        {
+            "PACE": "Pace",
+            "probable_shots": [
+                "STRAIGHT",
+                "SQUARECUT",
+                "FLICK",
+                "COVERDRIVE",
+                "LEGLANCE"
+            ]
+        },
+        {
+            "YORKER": "Yorker",
+            "probable_shots": [
+                "LONG_ON"
+            ]
+        },
+        {"OFF_BREAK": "Off Break", "probable_shots": []},
+        {"DOOSRA": "Doosra", "probable_shots": ["FLICK"]}
+    ],
+    "batting_cards": [
+        {"STRAIGHT": "Straight"},
+        {"SWEEP": "Sweep"},
+        {"FLICK": "Flick"},
+        {"COVERDRIVE": "CoverDrive"},
+        {"LEGLANCE": "LegLance"},
+        {"PULL": "Pull"},
+        {"LONG_ON": "Long On"},
+        {"SCOOP": "Scoop"},
+        {"SQUARECUT": "SquareCut"},
+        {"UPPERCUT": "UpperCut"}
+    ],
+    "shot_time": [
+        {"EARLY": "early", "probable_runs": [0, 7]},
+        {"GOOD": "good", "probable_runs": [1, 2]},
+        {"PERFECT": "perfect", "probable_runs": [3, 4, 6]},
+        {"LATE": "late", "probable_runs": [0, 7]}
+    ],
+    "runs": [0, 1, 2, 3, 4, 5, 6, "wicket"]
+}
