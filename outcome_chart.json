@@ -37,11 +37,11 @@
         {"SQUARECUT": "SquareCut"},
         {"UPPERCUT": "UpperCut"}
     ],
-    "shot_time": [
-        {"EARLY": "early", "probable_runs": [0, 7]},
-        {"GOOD": "good", "probable_runs": [1, 2]},
-        {"PERFECT": "perfect", "probable_runs": [3, 4, 6]},
-        {"LATE": "late", "probable_runs": [0, 7]}
-    ],
+    "shot_time": {
+        "EARLY": {"probable_runs": [0, 7]},
+        "GOOD": { "probable_runs": [1, 2]},
+        "PERFECT": { "probable_runs": [3, 4, 6]},
+        "LATE": { "probable_runs": [0, 7]}
+},
     "runs": [0, 1, 2, 3, 4, 5, 6, "wicket"]
 }

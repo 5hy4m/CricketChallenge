@@ -1,6 +1,6 @@
 class InputMock:
-    def execute(mock_input, data):
-            mock_input.side_effect = data
+    def execute(self, mock_input, data):
+        mock_input.return_value = data
 
 
 class ChallengeSelectionMock:
