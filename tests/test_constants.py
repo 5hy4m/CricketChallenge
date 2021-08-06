@@ -4,5 +4,4 @@ class MockChallenges:
 
 
 class Result:
-    PREDICT_OUTCOME_INPUT_PARSER_RESULTS = "BOUNCER PULL PERFECT"
-    PREDICT_OUTCOME_RESULTS = "4 runs"
+    pass

@@ -9,5 +9,4 @@ Please select any challenge
 1.PredictOutcome
 2.Commentry 
 3.SuperOver
-press the number accordingly.
-"""
+press the number accordingly."""

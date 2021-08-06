@@ -38,10 +38,10 @@
         {"UPPERCUT": "UpperCut"}
     ],
     "shot_time": {
-        "EARLY": {"probable_runs": [0, 7]},
+        "EARLY": {"probable_runs": [0, "wicket"]},
         "GOOD": { "probable_runs": [1, 2]},
         "PERFECT": { "probable_runs": [3, 4, 6]},
-        "LATE": { "probable_runs": [0, 7]}
+        "LATE": { "probable_runs": [0, "wicket"]}
 },
     "runs": [0, 1, 2, 3, 4, 5, 6, "wicket"]
 }
