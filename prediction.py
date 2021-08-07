@@ -17,3 +17,6 @@ class Prediction:
 class PredictOutcome(Prediction):
     def result(self):
         return random.choice(self.timings[self.timing]["probable_runs"])
+
+    def comment(self, result):
+        return random.choice(self.runs[str(result)]["probable_comments"])

@@ -16,12 +16,7 @@
                 "LEGLANCE"
             ]
         },
-        {
-            "YORKER": "Yorker",
-            "probable_shots": [
-                "LONG_ON"
-            ]
-        },
+        {"YORKER": "Yorker", "probable_shots": ["LONG_ON"]},
         {"OFF_BREAK": "Off Break", "probable_shots": []},
         {"DOOSRA": "Doosra", "probable_shots": ["FLICK"]}
     ],
@@ -39,9 +34,59 @@
     ],
     "shot_time": {
         "EARLY": {"probable_runs": [0, "wicket"]},
-        "GOOD": { "probable_runs": [1, 2]},
-        "PERFECT": { "probable_runs": [3, 4, 6]},
-        "LATE": { "probable_runs": [0, "wicket"]}
-},
-    "runs": [0, 1, 2, 3, 4, 5, 6, "wicket"]
+        "GOOD": {"probable_runs": [1, 2]},
+        "PERFECT": {"probable_runs": [3, 4, 6]},
+        "LATE": {"probable_runs": [0, "wicket"]}
+    },
+    "runs": {
+        "0": {
+            "probable_comments": [
+                "Excellent line and length.",
+                "Terrific fielding",
+                "Beautiful spell"
+            ]
+        },
+        "1": {
+            "probable_comments": [
+                "Excellent running between the wickets.",
+                "Batsman struggling with singles"
+            ]
+        },
+        "2": {
+            "probable_comments": [
+                "Convert ones into twos.",
+                "Excellent running between the wickets.",
+                "Thats sloppy work by the fielder"
+            ]
+        },
+        "3": {
+            "probable_comments": [
+                "Excellent running between the wickets.",
+                "Convert twos into threes."
+            ]
+        },
+        "4": {
+            "probable_comments": [
+                "It’s a huge hit.",
+                "Excellent effort on the boundary.",
+                "Excellent drive"
+            ]
+        },
+        "6": {
+            "probable_comments": [
+                "It’s a huge hit.",
+                "That’s massive and out of the ground.",
+                "Excellent effort on the boundary.",
+                "Just over the fielder."
+            ]
+        },
+        "wicket": {
+            "probable_comments": [
+                "It’s a wicket.",
+                "Edged and taken.",
+                "Howzat!",
+                "In the air, fielder coming underneath and taken"
+            ]
+        }
+    }
 }

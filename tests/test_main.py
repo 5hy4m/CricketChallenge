@@ -51,3 +51,23 @@ class TestMainFlow(unittest.TestCase):
                 self.assertEqual(string, "1 wicket")
             else:
                 self.assertEqual(string, f"{number} runs")
+
+    @mock.patch("input_parser.InputParser.parse_input_for_predict_outcome")
+    @patch("input_parser.InputParser.parse_challenge_selection")
+    def test_main_for_predict_outcome_challenge_with_comments(
+        self, mock_selection, mock_input_for_predict_outcome
+    ):
+        self.mocker.execute(
+            mock_selection,
+            ChallengeSelectionChoices.PREDICT_OUTCOME_CHALLENGE_WITH_COMMENTS,
+        )
+        self.mocker.execute(
+            mock_input_for_predict_outcome,
+            MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES_2,
+        )
+        with patch("sys.stdout", new=StringIO()) as output:
+            main()
+            string = self.remove_intro_string(output)
+            comment, result = string.split(" - ")
+            number, outcome = result.split(" ")
+            self.assertEqual(string, f"{comment} - {number} {outcome}")

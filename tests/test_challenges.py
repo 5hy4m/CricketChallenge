@@ -34,3 +34,18 @@ class TestChallenges(unittest.TestCase):
                 "probable_runs"
             ]
         )
+
+    @mock.patch("input_parser.InputParser.parse_input_for_predict_outcome")
+    def test_predict_outcome_with_comments(self, mock_input):
+        (
+            self.bowling_cards,
+            self.batting_cards,
+            self.timings,
+            self.runs,
+        ) = InputParser().read_outcome_chart()
+        InputMock().execute(
+            mock_input, data=MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES_2
+        )
+        result = PredictOutcome().result()
+        comment = PredictOutcome().comment(result)
+        self.assertTrue(comment in self.runs[str(result)]["probable_comments"])
