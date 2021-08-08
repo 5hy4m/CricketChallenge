@@ -33,7 +33,7 @@ class SuperOver(Prediction):
         super().__init__()
         self.wickets = 0
         self.remaining_balls = 6
-        self.chase = 11
+        self.target = 11
         self.score = 0
         self.batsmen_names = BATSMEN_NAMES
         self.bowler_name = BOWLER_NAME
@@ -43,39 +43,42 @@ class SuperOver(Prediction):
     def predict_bowl_type(self, shot):
         return random.choice(self.batting_cards[shot]["probable_bowl"])
 
+    def is_target_achieved(self):
+        return self.score > self.target
+
+    def is_all_out(self):
+        return self.wickets >= self.maximum_wicket
+
+    def print_output_for_current_bowl(self, result, printable_shot, printable_timing):
+        current_batsman = self.batsmen_names[self.wickets]
+        bowl = self.predict_bowl_type(self.shot)
+        comment = self.comment(result)
+        OutputParser.print_bowling_details(self.bowler_name, bowl)
+        OutputParser.print_batting_details(
+            current_batsman, printable_shot, printable_timing
+        )
+        OutputParser.print_output_for_predict_outcome_with_comments(comment, result)
+
     def start_innings(self):
-        while self.remaining_balls:
-            if self.score > self.chase:
-                break
-            current_batsman = self.batsmen_names[self.wickets]
+        while (
+            self.remaining_balls
+            and not self.is_target_achieved()
+            and not self.is_all_out()
+        ):
             (
-                (
-                    printable_shot,
-                    self.shot,
-                ),
-                (
-                    printable_timing,
-                    self.timing,
-                ),
+                (printable_shot, self.shot),
+                (printable_timing, self.timing),
             ) = self.parser.parse_input_with_printable_name()
-            bowl = self.predict_bowl_type(self.shot)
             result = self.result()
-            comment = self.comment(result)
-            OutputParser.print_bowling_details(self.bowler_name, bowl)
-            OutputParser.print_batting_details(
-                current_batsman, printable_shot, printable_timing
-            )
-            OutputParser.print_output_for_predict_outcome_with_comments(comment, result)
+            self.print_output_for_current_bowl(result, printable_shot, printable_timing)
             self.remaining_balls -= 1
             if result == "wicket":
                 self.wickets += 1
-                if self.wickets >= self.maximum_wicket:
-                    break
-            else:
-                self.score += result
-        if self.score > self.chase:
+                continue
+            self.score += result
+        if self.is_target_achieved():
             balance_wickets = self.maximum_wicket - self.wickets
             OutputParser.print_super_over_won_output(self.score, balance_wickets)
         else:
-            lost_by = self.chase - self.score
+            lost_by = self.target - self.score
             OutputParser.print_super_over_lost_output(self.score, lost_by)
