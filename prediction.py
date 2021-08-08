@@ -46,7 +46,6 @@ class SuperOver(Prediction):
     def start_innings(self):
         while self.remaining_balls:
             if self.score > self.chase:
-                OutputParser.print_super_over_won_output(self.score, self.wickets)
                 break
             current_batsman = self.batsmen_names[self.wickets]
             (
@@ -75,7 +74,8 @@ class SuperOver(Prediction):
             else:
                 self.score += result
         if self.score > self.chase:
-            OutputParser.print_super_over_won_output(self.score, self.wickets)
+            balance_wickets = self.maximum_wicket - self.wickets
+            OutputParser.print_super_over_won_output(self.score, balance_wickets)
         else:
             lost_by = self.chase - self.score
             OutputParser.print_super_over_lost_output(self.score, lost_by)

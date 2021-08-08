@@ -18,7 +18,6 @@ def main():
         OutputParser.print_output_for_predict_outcome_with_comments(comment, result)
     elif selection == ChallengeSelectionChoices.SUPER_OVER_CHALLENGE:
         SuperOver().start_innings()
-        pass
 
 
 if __name__ == "__main__":

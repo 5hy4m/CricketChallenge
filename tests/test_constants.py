@@ -57,7 +57,30 @@ class MockChallenges:
         "It’s a wicket.",
         "Edged and taken.",
     ]
+
     SUPER_OVER_TWO_WICKETS_OUTPUT = """Sudhakar bowled Inswinger ball,Craig played Perfect Straight shotIt’s a wicket. - 1 wicketSudhakar bowled Doosra ball,Paul played Early Flick shotEdged and taken. - 1 wicketAUSTRALIA scored: 0 runAUSTRALIA lost by 11 runs"""
+
+    SUPER_OVER_AFTER_THREE_BALLS_VICTORY_INPUT_SIDE_EFFECTS = [
+        [("Straight", "STRAIGHT"), ("Perfect", "PERFECT")],
+        [("Flick", "FLICK"), ("Perfect", "PERFECT")],
+        [("Hook", "HOOK"), ("Perfect", "PERFECT")],
+    ]
+
+    SUPER_OVER_AFTER_THREE_BALLS_VICTORY_BOWL_SIDE_EFFECTS = [
+        "Inswinger",
+        "Doosra",
+        "Pace",
+    ]
+
+    SUPER_OVER_AFTER_THREE_BALLS_VICTORY_RESULTS_SIDE_EFFECTS = [4, 4, 4]
+
+    SUPER_OVER_AFTER_THREE_BALLS_VICTORY_COMMENTS_SIDE_EFFECTS = [
+        "Excellent drive",
+        "It’s a huge hit.",
+        "Excellent effort on the boundary.",
+    ]
+
+    SUPER_OVER_AFTER_THREE_BALLS_VICTORY_OUTPUT_SIDE_EFFECTS = """Sudhakar bowled Inswinger ball,Craig played Perfect Straight shotExcellent drive - 4 runsSudhakar bowled Doosra ball,Craig played Perfect Flick shotIt’s a huge hit. - 4 runsSudhakar bowled Pace ball,Craig played Perfect Hook shotExcellent effort on the boundary. - 4 runsAUSTRALIA scored: 12 runsAUSTRALIA won by 2 wickets"""
 
     # SUPER_OVER_CHALLENGE_RESULT = """Sudhakar bowled Bouncer ball,
     # Craig played Perfect Straight shot

@@ -80,7 +80,6 @@ class TestMainFlow(unittest.TestCase):
             self.assertEqual(string, f"{comment} - {number} {outcome}")
 
     def test_super_over_challenge_output_for_each_ball(self):
-
         with patch("sys.stdout", new=StringIO()) as output:
             OutputParser.print_bowling_details(BOWLER_NAME, "Bouncer")
             OutputParser.print_batting_details(BATSMEN_NAMES[0], "Straight", "Perfect")
@@ -161,6 +160,44 @@ class TestMainFlow(unittest.TestCase):
             self.assertEqual(
                 string,
                 MockChallenges.SUPER_OVER_TWO_WICKETS_OUTPUT,
+            )
+
+    @patch("prediction.Prediction.comment")
+    @patch("prediction.Prediction.result")
+    @patch("prediction.SuperOver.predict_bowl_type")
+    @patch("input_parser.InputParser.parse_input_with_printable_name")
+    @patch("input_parser.InputParser.parse_challenge_selection")
+    def test_super_over_challenge_flow_with_three_balls_victory(
+        self,
+        mock_selection,
+        mock_input_for_super_over,
+        mock_bowl,
+        mock_result,
+        mock_comment,
+    ):
+        ChallengeSelectionMock.execute(
+            mock_selection,
+            ChallengeSelectionChoices.SUPER_OVER_CHALLENGE,
+        )
+        mock_input_for_super_over.side_effect = (
+            MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_INPUT_SIDE_EFFECTS
+        )
+        mock_bowl.side_effect = (
+            MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_BOWL_SIDE_EFFECTS
+        )
+        mock_result.side_effect = (
+            MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_RESULTS_SIDE_EFFECTS
+        )
+        mock_comment.side_effect = (
+            MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_COMMENTS_SIDE_EFFECTS
+        )
+        with patch("sys.stdout", new=StringIO()) as output:
+            main()
+            string = self.remove_intro_string(output)
+            self.assertEqual.__self__.maxDiff = None
+            self.assertEqual(
+                string,
+                MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_OUTPUT_SIDE_EFFECTS,
             )
 
     def test_super_over_challenge_output_for_won_output(self):
