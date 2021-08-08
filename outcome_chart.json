@@ -18,20 +18,112 @@
         },
         {"YORKER": "Yorker", "probable_shots": ["LONG_ON"]},
         {"OFF_BREAK": "Off Break", "probable_shots": []},
-        {"DOOSRA": "Doosra", "probable_shots": ["FLICK"]}
+        {
+            "DOOSRA": "Doosra",
+            "probable_shots": ["FLICK", "LEGLANCE", "UPPERCUT", "SQUARECUT"]
+        }
     ],
-    "batting_cards": [
-        {"STRAIGHT": "Straight"},
-        {"SWEEP": "Sweep"},
-        {"FLICK": "Flick"},
-        {"COVERDRIVE": "CoverDrive"},
-        {"LEGLANCE": "LegLance"},
-        {"PULL": "Pull"},
-        {"LONG_ON": "Long On"},
-        {"SCOOP": "Scoop"},
-        {"SQUARECUT": "SquareCut"},
-        {"UPPERCUT": "UpperCut"}
-    ],
+    "batting_cards": {
+        "HOOK": {
+            "probable_bowl": [
+                "Bouncer",
+                "Pace"
+            ]
+        },
+        "STRAIGHT": {
+            "probable_bowl": [
+                "Bouncer",
+                "Inswinger",
+                "Slower Ball",
+                "Yorker",
+                "Pace"
+            ]
+        },
+        "SWEEP": {
+            "probable_bowl": [
+                "Inswinger",
+                "Leg Cutter",
+                "Slower Ball"
+            ]
+        },
+        "FLICK": {
+            "probable_bowl": [
+                "Inswinger",
+                "Leg Cutter",
+                "Pace",
+                "Yorker",
+                "Doosra"
+            ]
+        },
+        "COVERDRIVE": {
+            "probable_bowl": [
+                "Bouncer",
+                "Outswinger",
+                "Off Cutter",
+                "Pace",
+                "Slower Ball"
+            ]
+        },
+        "LEGLANCE": {
+            "probable_bowl": [
+                "Inswinger",
+                "Leg Cutter",
+                "Pace",
+                "Slower Ball",
+                "Doosra"
+            ]
+        },
+        "PULL": {
+            "probable_bowl": [
+                "Bouncer",
+                "Doosra",
+                "Slower Ball"
+            ]
+        },
+        "LONGON": {
+            "probable_bowl": [
+                "Yorker",
+                "Inswinger",
+                "Leg Cutter",
+                "Slower Ball",
+                "Pace"
+            ]
+        },
+        "LONGOFF": {
+            "probable_bowl": [
+                "Yorker",
+                "Outswinger",
+                "Off Cutter",
+                "Slower Ball",
+                "Pace"
+            ]
+        },
+        "SCOOP": {
+            "probable_bowl": [
+                "Inswinger",
+                "Leg Cutter",
+                "Slower Ball"
+            ]
+        },
+        "SQUARECUT": {
+            "probable_bowl": [
+                "Bouncer",
+                "Doosra",
+                "Off Cutter",
+                "Outswinger",
+                "Off Break",
+                "Slower Ball",
+                "Pace"
+            ]
+        },
+        "UPPERCUT": {
+            "probable_bowl": [
+                "Bouncer",
+                "Doosra",
+                "Pace"
+            ]
+        }
+    },
     "shot_time": {
         "EARLY": {"probable_runs": [0, "wicket"]},
         "GOOD": {"probable_runs": [1, 2]},

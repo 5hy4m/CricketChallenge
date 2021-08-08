@@ -31,7 +31,7 @@ class TestMainFlow(unittest.TestCase):
         string = output.getvalue().replace(INTRO_STRING, "")
         return string.replace("\n", "")
 
-    @mock.patch("input_parser.InputParser.parse_input_for_predict_outcome")
+    @mock.patch("input_parser.InputParser.parse_input")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_main_for_predict_outcome_challenge(
         self, mock_selection, mock_input_for_predict_outcome
@@ -52,7 +52,7 @@ class TestMainFlow(unittest.TestCase):
             else:
                 self.assertEqual(string, f"{number} runs")
 
-    @mock.patch("input_parser.InputParser.parse_input_for_predict_outcome")
+    @mock.patch("input_parser.InputParser.parse_input")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_main_for_predict_outcome_challenge_with_comments(
         self, mock_selection, mock_input_for_predict_outcome

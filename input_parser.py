@@ -2,7 +2,7 @@ import json
 
 
 class InputParser:
-    def parse_input_for_predict_outcome(self):
+    def parse_input(self):
         input_array = input().split(" ")
         return [string.upper() for string in input_array]
 

@@ -11,13 +11,13 @@ sys.path.append(parentdir)
 from constants import ChallengeSelectionChoices
 
 from input_parser import InputParser
-from tests.mocks import InputMock, ChallengeSelectionMock
+from tests.mocks import InputMock, ChallengeSelectionMock, SuperOverMock
 from tests.test_constants import MockChallenges, Result
-from prediction import PredictOutcome
+from prediction import PredictOutcome, SuperOver
 
 
 class TestChallenges(unittest.TestCase):
-    @mock.patch("input_parser.InputParser.parse_input_for_predict_outcome")
+    @mock.patch("input_parser.InputParser.parse_input")
     def test_predict_outcome(self, mock_input):
         (
             self.bowling_cards,
@@ -35,7 +35,7 @@ class TestChallenges(unittest.TestCase):
             ]
         )
 
-    @mock.patch("input_parser.InputParser.parse_input_for_predict_outcome")
+    @mock.patch("input_parser.InputParser.parse_input")
     def test_predict_outcome_with_comments(self, mock_input):
         (
             self.bowling_cards,
@@ -49,3 +49,11 @@ class TestChallenges(unittest.TestCase):
         result = PredictOutcome().result()
         comment = PredictOutcome().comment(result)
         self.assertTrue(comment in self.runs[str(result)]["probable_comments"])
+
+    @mock.patch("input_parser.InputParser.parse_input")
+    def test_super_over_challenge(self, mock_input):
+        mock_input.side_effect = (
+            MockChallenges.SUPER_OVER_CHALLENGE_MOCK_INPUT_PARSED_VALUES
+        )
+        result = SuperOver().start_innings()
+        print(result)
