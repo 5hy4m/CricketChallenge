@@ -35,7 +35,28 @@ class SuperOverConstants:
         "It’s a huge hit.",
     ]
 
-    OUTPUT = """Sudhakar bowled Inswinger ball,Craig played Perfect Straight shotExcellent drive - 4 runsSudhakar bowled Doosra ball,Craig played Early Flick shotHowzat! - 1 wicketSudhakar bowled Pace ball,Paul played Good Hook shotExcellent running between the wickets. - 1 runSudhakar bowled Inswinger ball,Paul played Good LegGlance shotThats sloppy work by the fielder - 2 runsSudhakar bowled Pace ball,Paul played Late LongOff shotTerrific fielding - 0 runSudhakar bowled Leg Cutter ball,Paul played Perfect LongOn shotIt’s a huge hit. - 6 runsAUSTRALIA scored: 13 runsAUSTRALIA won by 1 wicket"""
+    OUTPUT = (
+        "Sudhakar bowled Inswinger ball,"
+        "Craig played Perfect Straight shot"
+        "Excellent drive - 4 runs"
+        "Sudhakar bowled Doosra ball,"
+        "Craig played Early Flick shot"
+        "Howzat! - 1 wicket"
+        "Sudhakar bowled Pace ball,"
+        "Paul played Good Hook shot"
+        "Excellent running between the wickets. - 1 run"
+        "Sudhakar bowled Inswinger ball,"
+        "Paul played Good LegGlance shot"
+        "Thats sloppy work by the fielder - 2 runs"
+        "Sudhakar bowled Pace ball,"
+        "Paul played Late LongOff shot"
+        "Terrific fielding - 0 run"
+        "Sudhakar bowled Leg Cutter ball,"
+        "Paul played Perfect LongOn shot"
+        "It’s a huge hit. - 6 runs"
+        "AUSTRALIA scored: 13 runs"
+        "AUSTRALIA won by 1 wicket"
+    )
 
 
 class SuperOverTwoWicketsConstants:
@@ -53,7 +74,16 @@ class SuperOverTwoWicketsConstants:
         "Edged and taken.",
     ]
 
-    OUTPUT = """Sudhakar bowled Inswinger ball,Craig played Perfect Straight shotIt’s a wicket. - 1 wicketSudhakar bowled Doosra ball,Paul played Early Flick shotEdged and taken. - 1 wicketAUSTRALIA scored: 0 runAUSTRALIA lost by 11 runs"""
+    OUTPUT = (
+        "Sudhakar bowled Inswinger ball,"
+        "Craig played Perfect Straight shot"
+        "It’s a wicket. - 1 wicket"
+        "Sudhakar bowled Doosra ball,"
+        "Paul played Early Flick shot"
+        "Edged and taken. - 1 wicket"
+        "AUSTRALIA scored: 0 run"
+        "AUSTRALIA lost by 11 runs"
+    )
 
 
 class SuperOverThreeBallsVictoryConstants:
@@ -77,4 +107,16 @@ class SuperOverThreeBallsVictoryConstants:
         "Excellent effort on the boundary.",
     ]
 
-    OUTPUT_SIDE_EFFECTS = """Sudhakar bowled Inswinger ball,Craig played Perfect Straight shotExcellent drive - 4 runsSudhakar bowled Doosra ball,Craig played Perfect Flick shotIt’s a huge hit. - 4 runsSudhakar bowled Pace ball,Craig played Perfect Hook shotExcellent effort on the boundary. - 4 runsAUSTRALIA scored: 12 runsAUSTRALIA won by 2 wickets"""
+    OUTPUT_SIDE_EFFECTS = (
+        "Sudhakar bowled Inswinger ball,"
+        "Craig played Perfect Straight shot"
+        "Excellent drive - 4 runs"
+        "Sudhakar bowled Doosra ball,"
+        "Craig played Perfect Flick shot"
+        "It’s a huge hit. - 4 runs"
+        "Sudhakar bowled Pace ball,"
+        "Craig played Perfect Hook shot"
+        "Excellent effort on the boundary. - 4 runs"
+        "AUSTRALIA scored: 12 runs"
+        "AUSTRALIA won by 2 wickets"
+    )
