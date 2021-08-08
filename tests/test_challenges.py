@@ -31,7 +31,7 @@ class TestChallenges(unittest.TestCase):
             mock_input, data=MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES
         )
         self.assertTrue(
-            PredictOutcome().result()
+            PredictOutcome().get_result_of_current_bowl()
             in self.timings[MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES[2]][
                 "probable_runs"
             ]
@@ -42,8 +42,8 @@ class TestChallenges(unittest.TestCase):
         InputMock().execute(
             mock_input, data=MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES_2
         )
-        result = PredictOutcome().result()
-        comment = PredictOutcome().comment(result)
+        result = PredictOutcome().get_result_of_current_bowl()
+        comment = PredictOutcome().give_comment(result)
         self.assertTrue(comment in self.runs[str(result)]["probable_comments"])
 
     def test_super_over_challenge_predict_bowl_type(self):
