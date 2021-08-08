@@ -1,7 +1,5 @@
-from input_parser import InputParser
-
 import random
-from output_parser import OutputParser
+from input_parser import InputParser
 
 
 class Prediction:

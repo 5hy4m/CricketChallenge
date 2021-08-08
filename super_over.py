@@ -11,10 +11,10 @@ class PredictSuperOver(Prediction):
         self.remaining_balls = 6
         self.target = 11
         self.score = 0
+        self.maximum_wicket = 2
         self.batsmen_names = BATSMEN_NAMES
         self.bowler_name = BOWLER_NAME
         self.country_name = COUNTRY_NAME
-        self.maximum_wicket = 2
 
     def predict_bowl_type(self, shot):
         return random.choice(self.batting_cards[shot]["probable_bowl"])
@@ -42,12 +42,16 @@ class PredictSuperOver(Prediction):
         )
         OutputParser.print_output_for_predict_outcome_with_comment(comment, result)
 
+    def parse_input_values(self):
+        (
+            (printable_shot, self.shot),
+            (printable_timing, self.timing),
+        ) = self.parser.parse_input_with_printable_name()
+        return (printable_shot, printable_timing)
+
     def bowl_six_balls(self):
         while self.can_bowl():
-            (
-                (printable_shot, self.shot),
-                (printable_timing, self.timing),
-            ) = self.parser.parse_input_with_printable_name()
+            printable_shot, printable_timing = self.parse_input_values()
             result = self.get_result_of_current_bowl()
             self.print_output_for_current_bowl(result, printable_shot, printable_timing)
             self.remaining_balls -= 1

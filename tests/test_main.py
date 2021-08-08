@@ -18,7 +18,6 @@ from constants import (
     COUNTRY_NAME,
 )
 from input_parser import InputParser
-from tests.mocks import InputMock, ChallengeSelectionMock, SuperOverMock
 from tests.test_constants import MockChallenges
 from main import main
 from output_parser import OutputParser
@@ -26,7 +25,6 @@ from output_parser import OutputParser
 
 class TestMainFlow(unittest.TestCase):
     def setUp(self):
-        self.mocker = InputMock()
         (
             self.batting_cards,
             self.timings,
@@ -42,12 +40,11 @@ class TestMainFlow(unittest.TestCase):
     def test_main_for_predict_outcome_challenge(
         self, mock_selection, mock_input_for_predict_outcome
     ):
-        self.mocker.execute(
-            mock_selection, ChallengeSelectionChoices.PREDICT_OUTCOME_CHALLENGE
+        mock_selection.return_value = (
+            ChallengeSelectionChoices.PREDICT_OUTCOME_CHALLENGE
         )
-        self.mocker.execute(
-            mock_input_for_predict_outcome,
-            MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES,
+        mock_input_for_predict_outcome.return_value = (
+            MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES
         )
         with patch("sys.stdout", new=StringIO()) as output:
             main()
@@ -63,13 +60,11 @@ class TestMainFlow(unittest.TestCase):
     def test_main_for_predict_outcome_challenge_with_comments(
         self, mock_selection, mock_input_for_predict_outcome
     ):
-        self.mocker.execute(
-            mock_selection,
-            ChallengeSelectionChoices.PREDICT_OUTCOME_CHALLENGE_WITH_COMMENTS,
+        mock_selection.return_value = (
+            ChallengeSelectionChoices.PREDICT_OUTCOME_CHALLENGE_WITH_COMMENTS
         )
-        self.mocker.execute(
-            mock_input_for_predict_outcome,
-            MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES_2,
+        mock_input_for_predict_outcome.return_value = (
+            MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES_2
         )
         with patch("sys.stdout", new=StringIO()) as output:
             main()
@@ -104,10 +99,7 @@ class TestMainFlow(unittest.TestCase):
         mock_result_of_current_bowl,
         mock_comment,
     ):
-        ChallengeSelectionMock.execute(
-            mock_selection,
-            ChallengeSelectionChoices.SUPER_OVER_CHALLENGE,
-        )
+        mock_selection.return_value = ChallengeSelectionChoices.SUPER_OVER_CHALLENGE
         mock_input_for_super_over.side_effect = (
             MockChallenges.MOCK_INPUT_SUPER_OVER_PARSED_VALUES
         )
@@ -138,10 +130,7 @@ class TestMainFlow(unittest.TestCase):
         mock_result_of_current_bowl,
         mock_comment,
     ):
-        ChallengeSelectionMock.execute(
-            mock_selection,
-            ChallengeSelectionChoices.SUPER_OVER_CHALLENGE,
-        )
+        mock_selection.return_value = ChallengeSelectionChoices.SUPER_OVER_CHALLENGE
         mock_input_for_super_over.side_effect = (
             MockChallenges.MOCK_INPUT_SUPER_OVER_AFTER_TWO_WICKETS_SIDE_EFFECTS
         )
@@ -176,10 +165,7 @@ class TestMainFlow(unittest.TestCase):
         mock_result_of_current_bowl,
         mock_comment,
     ):
-        ChallengeSelectionMock.execute(
-            mock_selection,
-            ChallengeSelectionChoices.SUPER_OVER_CHALLENGE,
-        )
+        mock_selection.return_value = ChallengeSelectionChoices.SUPER_OVER_CHALLENGE
         mock_input_for_super_over.side_effect = (
             MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_INPUT_SIDE_EFFECTS
         )
