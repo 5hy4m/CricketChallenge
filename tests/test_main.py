@@ -18,7 +18,12 @@ from constants import (
     COUNTRY_NAME,
 )
 from input_parser import InputParser
-from tests.test_constants import MockChallenges
+from tests.test_constants import (
+    PredictOutComeConstants,
+    SuperOverConstants,
+    SuperOverTwoWicketsConstants,
+    SuperOverThreeBallsVictoryConstants,
+)
 from main import main
 from output_parser import OutputParser
 
@@ -44,7 +49,7 @@ class TestMainFlow(unittest.TestCase):
             ChallengeSelectionChoices.PREDICT_OUTCOME_CHALLENGE
         )
         mock_input_for_predict_outcome.return_value = (
-            MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES
+            PredictOutComeConstants.PARSED_VALUES
         )
         with patch("sys.stdout", new=StringIO()) as output:
             main()
@@ -64,7 +69,7 @@ class TestMainFlow(unittest.TestCase):
             ChallengeSelectionChoices.PREDICT_OUTCOME_CHALLENGE_WITH_COMMENTS
         )
         mock_input_for_predict_outcome.return_value = (
-            MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES_2
+            PredictOutComeConstants.PARSED_VALUES_2
         )
         with patch("sys.stdout", new=StringIO()) as output:
             main()
@@ -100,21 +105,19 @@ class TestMainFlow(unittest.TestCase):
         mock_comment,
     ):
         mock_selection.return_value = ChallengeSelectionChoices.SUPER_OVER_CHALLENGE
-        mock_input_for_super_over.side_effect = (
-            MockChallenges.MOCK_INPUT_SUPER_OVER_PARSED_VALUES
-        )
-        mock_bowl.side_effect = MockChallenges.SUPER_OVER_BOWL_SIDE_EFFECTS
+        mock_input_for_super_over.side_effect = SuperOverConstants.INPUT_SIDE_EFFECTS
+        mock_bowl.side_effect = SuperOverConstants.BOWL_SIDE_EFFECTS
         mock_result_of_current_bowl.side_effect = (
-            MockChallenges.SUPER_OVER_RESULTS_SIDE_EFFECTS
+            SuperOverConstants.RESULTS_SIDE_EFFECTS
         )
-        mock_comment.side_effect = MockChallenges.SUPER_OVER_COMMENTS_SIDE_EFFECTS
+        mock_comment.side_effect = SuperOverConstants.COMMENTS_SIDE_EFFECTS
         with patch("sys.stdout", new=StringIO()) as output:
             main()
             string = self.remove_intro_string(output)
             self.assertEqual.__self__.maxDiff = None
             self.assertEqual(
                 string,
-                MockChallenges.SUPER_OVER_SIX_BALLS_OUTPUT,
+                SuperOverConstants.OUTPUT,
             )
 
     @patch("prediction.Prediction.give_comment")
@@ -132,24 +135,20 @@ class TestMainFlow(unittest.TestCase):
     ):
         mock_selection.return_value = ChallengeSelectionChoices.SUPER_OVER_CHALLENGE
         mock_input_for_super_over.side_effect = (
-            MockChallenges.MOCK_INPUT_SUPER_OVER_AFTER_TWO_WICKETS_SIDE_EFFECTS
+            SuperOverTwoWicketsConstants.INPUT_SIDE_EFFECTS
         )
-        mock_bowl.side_effect = (
-            MockChallenges.SUPER_OVER_AFTER_TWO_WICKETS_BOWL_SIDE_EFFECTS
-        )
+        mock_bowl.side_effect = SuperOverTwoWicketsConstants.BOWL_SIDE_EFFECTS
         mock_result_of_current_bowl.side_effect = (
-            MockChallenges.SUPER_OVER_AFTER_TWO_WICKETS_RESULTS_SIDE_EFFECTS
+            SuperOverTwoWicketsConstants.RESULTS_SIDE_EFFECTS
         )
-        mock_comment.side_effect = (
-            MockChallenges.SUPER_OVER_AFTER_TWO_WICKETS_COMMENTS_SIDE_EFFECTS
-        )
+        mock_comment.side_effect = SuperOverTwoWicketsConstants.COMMENTS_SIDE_EFFECTS
         with patch("sys.stdout", new=StringIO()) as output:
             main()
             string = self.remove_intro_string(output)
             self.assertEqual.__self__.maxDiff = None
             self.assertEqual(
                 string,
-                MockChallenges.SUPER_OVER_TWO_WICKETS_OUTPUT,
+                SuperOverTwoWicketsConstants.OUTPUT,
             )
 
     @patch("prediction.Prediction.give_comment")
@@ -167,16 +166,14 @@ class TestMainFlow(unittest.TestCase):
     ):
         mock_selection.return_value = ChallengeSelectionChoices.SUPER_OVER_CHALLENGE
         mock_input_for_super_over.side_effect = (
-            MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_INPUT_SIDE_EFFECTS
+            SuperOverThreeBallsVictoryConstants.INPUT_SIDE_EFFECTS
         )
-        mock_bowl.side_effect = (
-            MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_BOWL_SIDE_EFFECTS
-        )
+        mock_bowl.side_effect = SuperOverThreeBallsVictoryConstants.BOWL_SIDE_EFFECTS
         mock_result_of_current_bowl.side_effect = (
-            MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_RESULTS_SIDE_EFFECTS
+            SuperOverThreeBallsVictoryConstants.RESULTS_SIDE_EFFECTS
         )
         mock_comment.side_effect = (
-            MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_COMMENTS_SIDE_EFFECTS
+            SuperOverThreeBallsVictoryConstants.COMMENTS_SIDE_EFFECTS
         )
         with patch("sys.stdout", new=StringIO()) as output:
             main()
@@ -184,7 +181,7 @@ class TestMainFlow(unittest.TestCase):
             self.assertEqual.__self__.maxDiff = None
             self.assertEqual(
                 string,
-                MockChallenges.SUPER_OVER_AFTER_THREE_BALLS_VICTORY_OUTPUT_SIDE_EFFECTS,
+                SuperOverThreeBallsVictoryConstants.OUTPUT_SIDE_EFFECTS,
             )
 
     def test_super_over_challenge_output_for_won_output(self):

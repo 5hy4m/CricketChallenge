@@ -10,7 +10,7 @@ sys.path.append(parentdir)
 
 from constants import ChallengeSelectionChoices
 from input_parser import InputParser
-from tests.test_constants import MockChallenges
+from tests.test_constants import PredictOutComeConstants
 
 
 class TestInputParser(unittest.TestCase):
@@ -28,14 +28,17 @@ class TestInputParser(unittest.TestCase):
 
     @mock.patch("builtins.input")
     def test_predict_outcome_input_parser(self, mock_input):
-        mock_input.return_value = MockChallenges.PREDICT_OUTCOME_MOCK_INPUT
+        mock_input.return_value = PredictOutComeConstants.MOCK_INPUT
         bowl, shot, timing = self.parser.parse_input()
         self.assertEqual(
-            bowl, MockChallenges.PREDICT_OUTCOME_MOCK_INPUT.split(" ")[0].upper()
+            bowl,
+            PredictOutComeConstants.MOCK_INPUT.split(" ")[0].upper(),
         )
         self.assertEqual(
-            shot, MockChallenges.PREDICT_OUTCOME_MOCK_INPUT.split(" ")[1].upper()
+            shot,
+            PredictOutComeConstants.MOCK_INPUT.split(" ")[1].upper(),
         )
         self.assertEqual(
-            timing, MockChallenges.PREDICT_OUTCOME_MOCK_INPUT.split(" ")[2].upper()
+            timing,
+            PredictOutComeConstants.MOCK_INPUT.split(" ")[2].upper(),
         )

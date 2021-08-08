@@ -11,7 +11,7 @@ sys.path.append(parentdir)
 from constants import ChallengeSelectionChoices
 
 from input_parser import InputParser
-from tests.test_constants import MockChallenges
+from tests.test_constants import PredictOutComeConstants
 from predict_outcome import PredictOutcome
 from super_over import PredictSuperOver
 
@@ -26,21 +26,15 @@ class TestChallenges(unittest.TestCase):
 
     @mock.patch("input_parser.InputParser.parse_input")
     def test_predict_outcome(self, mock_input):
-        mock_input.return_value = (
-            MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES
-        )
+        mock_input.return_value = PredictOutComeConstants.PARSED_VALUES
         self.assertTrue(
             PredictOutcome().get_result_of_current_bowl()
-            in self.timings[MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES[2]][
-                "probable_runs"
-            ]
+            in self.timings[PredictOutComeConstants.PARSED_VALUES[2]]["probable_runs"]
         )
 
     @mock.patch("input_parser.InputParser.parse_input")
     def test_predict_outcome_with_comments(self, mock_input):
-        mock_input.return_value = (
-            MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES_2
-        )
+        mock_input.return_value = PredictOutComeConstants.PARSED_VALUES_2
         result = PredictOutcome().get_result_of_current_bowl()
         comment = PredictOutcome().give_comment(result)
         self.assertTrue(comment in self.runs[str(result)]["probable_comments"])
