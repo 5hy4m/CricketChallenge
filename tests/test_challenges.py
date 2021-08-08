@@ -12,19 +12,21 @@ from constants import ChallengeSelectionChoices
 
 from input_parser import InputParser
 from tests.mocks import InputMock, ChallengeSelectionMock, SuperOverMock
-from tests.test_constants import MockChallenges, Result
+from tests.test_constants import MockChallenges
 from prediction import PredictOutcome, SuperOver
 
 
 class TestChallenges(unittest.TestCase):
-    @mock.patch("input_parser.InputParser.parse_input")
-    def test_predict_outcome(self, mock_input):
+    def setUp(self):
         (
             self.bowling_cards,
             self.batting_cards,
             self.timings,
             self.runs,
         ) = InputParser().read_outcome_chart()
+
+    @mock.patch("input_parser.InputParser.parse_input")
+    def test_predict_outcome(self, mock_input):
         InputMock().execute(
             mock_input, data=MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES
         )
@@ -37,12 +39,6 @@ class TestChallenges(unittest.TestCase):
 
     @mock.patch("input_parser.InputParser.parse_input")
     def test_predict_outcome_with_comments(self, mock_input):
-        (
-            self.bowling_cards,
-            self.batting_cards,
-            self.timings,
-            self.runs,
-        ) = InputParser().read_outcome_chart()
         InputMock().execute(
             mock_input, data=MockChallenges.PREDICT_OUTCOME_MOCK_INPUT_PARSED_VALUES_2
         )
@@ -50,10 +46,7 @@ class TestChallenges(unittest.TestCase):
         comment = PredictOutcome().comment(result)
         self.assertTrue(comment in self.runs[str(result)]["probable_comments"])
 
-    @mock.patch("input_parser.InputParser.parse_input")
-    def test_super_over_challenge(self, mock_input):
-        mock_input.side_effect = (
-            MockChallenges.SUPER_OVER_CHALLENGE_MOCK_INPUT_PARSED_VALUES
-        )
-        result = SuperOver().start_innings()
-        print(result)
+    def test_super_over_challenge_predict_bowl_type(self):
+        shot = "STRAIGHT"
+        bowl = SuperOver().predict_bowl_type(shot)
+        self.assertTrue(bowl in self.batting_cards[shot]["probable_bowl"])

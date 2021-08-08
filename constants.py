@@ -10,3 +10,7 @@ Please select any challenge
 2.Commentry 
 3.SuperOver
 press the number accordingly."""
+
+BATSMEN_NAMES = ["Craig", "Paul"]
+BOWLER_NAME = "Sudhakar"
+COUNTRY_NAME = "AUSTRALIA"

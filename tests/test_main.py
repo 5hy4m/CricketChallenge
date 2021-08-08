@@ -10,11 +10,18 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 
-from constants import ChallengeSelectionChoices, INTRO_STRING
+from constants import (
+    ChallengeSelectionChoices,
+    INTRO_STRING,
+    BATSMEN_NAMES,
+    BOWLER_NAME,
+    COUNTRY_NAME,
+)
 from input_parser import InputParser
-from tests.mocks import InputMock, ChallengeSelectionMock
+from tests.mocks import InputMock, ChallengeSelectionMock, SuperOverMock
 from tests.test_constants import MockChallenges
 from main import main
+from output_parser import OutputParser
 
 
 class TestMainFlow(unittest.TestCase):
@@ -71,3 +78,99 @@ class TestMainFlow(unittest.TestCase):
             comment, result = string.split(" - ")
             number, outcome = result.split(" ")
             self.assertEqual(string, f"{comment} - {number} {outcome}")
+
+    def test_super_over_challenge_output_for_each_ball(self):
+
+        with patch("sys.stdout", new=StringIO()) as output:
+            OutputParser.print_bowling_details(BOWLER_NAME, "Bouncer")
+            OutputParser.print_batting_details(BATSMEN_NAMES[0], "Straight", "Perfect")
+            OutputParser.print_output_for_predict_outcome_with_comments(
+                "Excellent line and length", 1
+            )
+            string = self.remove_intro_string(output)
+            self.assertEqual(
+                string,
+                f"""{BOWLER_NAME} bowled Bouncer ball,{BATSMEN_NAMES[0]} played Perfect Straight shotExcellent line and length - 1 run""",
+            )
+
+    @patch("prediction.Prediction.comment")
+    @patch("prediction.Prediction.result")
+    @patch("prediction.SuperOver.predict_bowl_type")
+    @patch("input_parser.InputParser.parse_input")
+    @patch("input_parser.InputParser.parse_challenge_selection")
+    def test_super_over_challenge_flow(
+        self,
+        mock_selection,
+        mock_input_for_super_over,
+        mock_bowl,
+        mock_result,
+        mock_comment,
+    ):
+        ChallengeSelectionMock.execute(
+            mock_selection,
+            ChallengeSelectionChoices.SUPER_OVER_CHALLENGE,
+        )
+        mock_input_for_super_over.side_effect = (
+            MockChallenges.MOCK_INPUT_SUPER_OVER_PARSED_VALUES
+        )
+        mock_bowl.side_effect = MockChallenges.SUPER_OVER_BOWL_SIDE_EFFECTS
+        mock_result.side_effect = MockChallenges.SUPER_OVER_RESULTS_SIDE_EFFECTS
+        mock_comment.side_effect = MockChallenges.SUPER_OVER_COMMENTS_SIDE_EFFECTS
+        with patch("sys.stdout", new=StringIO()) as output:
+            main()
+            string = self.remove_intro_string(output)
+            self.assertEqual.__self__.maxDiff = None
+            self.assertEqual(
+                string,
+                MockChallenges.SUPER_OVER_SIX_BALLS_OUTPUT,
+            )
+
+    @patch("prediction.Prediction.comment")
+    @patch("prediction.Prediction.result")
+    @patch("prediction.SuperOver.predict_bowl_type")
+    @patch("input_parser.InputParser.parse_input")
+    @patch("input_parser.InputParser.parse_challenge_selection")
+    def test_super_over_challenge_flow_after_two_wickets(
+        self,
+        mock_selection,
+        mock_input_for_super_over,
+        mock_bowl,
+        mock_result,
+        mock_comment,
+    ):
+        ChallengeSelectionMock.execute(
+            mock_selection,
+            ChallengeSelectionChoices.SUPER_OVER_CHALLENGE,
+        )
+        mock_input_for_super_over.side_effect = (
+            MockChallenges.MOCK_INPUT_SUPER_OVER_PARSED_VALUES
+        )
+        mock_bowl.side_effect = MockChallenges.SUPER_OVER_BOWL_SIDE_EFFECTS
+        mock_result.side_effect = MockChallenges.SUPER_OVER_RESULTS_SIDE_EFFECTS
+        mock_comment.side_effect = MockChallenges.SUPER_OVER_COMMENTS_SIDE_EFFECTS
+        with patch("sys.stdout", new=StringIO()) as output:
+            main()
+            string = self.remove_intro_string(output)
+            self.assertEqual.__self__.maxDiff = None
+            self.assertEqual(
+                string,
+                MockChallenges.SUPER_OVER_SIX_BALLS_OUTPUT,
+            )
+
+    def test_super_over_challenge_output_for_won_output(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            OutputParser.print_super_over_won_output(22, 1)
+            string = self.remove_intro_string(output)
+            self.assertEqual(
+                string,
+                f"""AUSTRALIA scored: 22 runsAUSTRALIA won by 1 wicket""",
+            )
+
+    def test_super_over_challenge_output_for_lost_output(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            OutputParser.print_super_over_lost_output(18, 2)
+            string = self.remove_intro_string(output)
+            self.assertEqual(
+                string,
+                f"""AUSTRALIA scored: 18 runsAUSTRALIA lost by 2 runs""",
+            )
