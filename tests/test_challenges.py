@@ -13,7 +13,8 @@ from constants import ChallengeSelectionChoices
 from input_parser import InputParser
 from tests.mocks import InputMock, ChallengeSelectionMock, SuperOverMock
 from tests.test_constants import MockChallenges
-from prediction import PredictOutcome, SuperOver
+from prediction import PredictOutcome
+from super_over import SuperOver
 
 
 class TestChallenges(unittest.TestCase):

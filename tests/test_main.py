@@ -94,7 +94,7 @@ class TestMainFlow(unittest.TestCase):
 
     @patch("prediction.Prediction.give_comment")
     @patch("prediction.Prediction.get_result_of_current_bowl")
-    @patch("prediction.SuperOver.predict_bowl_type")
+    @patch("super_over.SuperOver.predict_bowl_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow(
@@ -128,7 +128,7 @@ class TestMainFlow(unittest.TestCase):
 
     @patch("prediction.Prediction.give_comment")
     @patch("prediction.Prediction.get_result_of_current_bowl")
-    @patch("prediction.SuperOver.predict_bowl_type")
+    @patch("super_over.SuperOver.predict_bowl_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow_after_two_wickets(
@@ -166,7 +166,7 @@ class TestMainFlow(unittest.TestCase):
 
     @patch("prediction.Prediction.give_comment")
     @patch("prediction.Prediction.get_result_of_current_bowl")
-    @patch("prediction.SuperOver.predict_bowl_type")
+    @patch("super_over.SuperOver.predict_bowl_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow_with_three_balls_victory(
