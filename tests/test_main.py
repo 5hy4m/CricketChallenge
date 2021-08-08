@@ -83,7 +83,7 @@ class TestMainFlow(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             OutputParser.print_bowling_details(BOWLER_NAME, "Bouncer")
             OutputParser.print_batting_details(BATSMEN_NAMES[0], "Straight", "Perfect")
-            OutputParser.print_output_for_predict_outcome_with_comments(
+            OutputParser.print_output_for_predict_outcome_with_comment(
                 "Excellent line and length", 1
             )
             string = self.remove_intro_string(output)
@@ -94,7 +94,7 @@ class TestMainFlow(unittest.TestCase):
 
     @patch("prediction.Prediction.give_comment")
     @patch("prediction.Prediction.get_result_of_current_bowl")
-    @patch("super_over.SuperOver.predict_bowl_type")
+    @patch("super_over.PredictSuperOver.predict_bowl_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow(
@@ -128,7 +128,7 @@ class TestMainFlow(unittest.TestCase):
 
     @patch("prediction.Prediction.give_comment")
     @patch("prediction.Prediction.get_result_of_current_bowl")
-    @patch("super_over.SuperOver.predict_bowl_type")
+    @patch("super_over.PredictSuperOver.predict_bowl_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow_after_two_wickets(
@@ -166,7 +166,7 @@ class TestMainFlow(unittest.TestCase):
 
     @patch("prediction.Prediction.give_comment")
     @patch("prediction.Prediction.get_result_of_current_bowl")
-    @patch("super_over.SuperOver.predict_bowl_type")
+    @patch("super_over.PredictSuperOver.predict_bowl_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow_with_three_balls_victory(

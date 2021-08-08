@@ -14,7 +14,7 @@ from input_parser import InputParser
 from tests.mocks import InputMock, ChallengeSelectionMock, SuperOverMock
 from tests.test_constants import MockChallenges
 from prediction import PredictOutcome
-from super_over import SuperOver
+from super_over import PredictSuperOver
 
 
 class TestChallenges(unittest.TestCase):
@@ -49,5 +49,5 @@ class TestChallenges(unittest.TestCase):
 
     def test_super_over_challenge_predict_bowl_type(self):
         shot = "STRAIGHT"
-        bowl = SuperOver().predict_bowl_type(shot)
+        bowl = PredictSuperOver().predict_bowl_type(shot)
         self.assertTrue(bowl in self.batting_cards[shot]["probable_bowl"])

@@ -52,7 +52,7 @@ class OutputParser:
         print(cls.lost_string(lost_by))
 
     @classmethod
-    def print_output_for_predict_outcome_with_comments(cls, comment, result):
+    def print_output_for_predict_outcome_with_comment(cls, comment, result):
         print(f"{comment} - {cls.result_string(result)}")
 
     @classmethod

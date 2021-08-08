@@ -4,7 +4,7 @@ from constants import BOWLER_NAME, BATSMEN_NAMES, COUNTRY_NAME
 from prediction import Prediction
 
 
-class SuperOver(Prediction):
+class PredictSuperOver(Prediction):
     def __init__(self):
         super().__init__()
         self.wickets = 0
@@ -40,7 +40,7 @@ class SuperOver(Prediction):
         OutputParser.print_batting_details(
             current_batsman, printable_shot, printable_timing
         )
-        OutputParser.print_output_for_predict_outcome_with_comments(comment, result)
+        OutputParser.print_output_for_predict_outcome_with_comment(comment, result)
 
     def bowl_six_balls(self):
         while self.can_bowl():
@@ -56,7 +56,7 @@ class SuperOver(Prediction):
                 continue
             self.score += result
 
-    def start_innings(self):
+    def start_second_innings(self):
         self.bowl_six_balls()
         if self.is_target_achieved():
             balance_wickets = self.maximum_wicket - self.wickets
