@@ -13,14 +13,13 @@ from constants import ChallengeSelectionChoices
 from input_parser import InputParser
 from tests.mocks import InputMock, ChallengeSelectionMock, SuperOverMock
 from tests.test_constants import MockChallenges
-from prediction import PredictOutcome
+from predict_outcome import PredictOutcome
 from super_over import PredictSuperOver
 
 
 class TestChallenges(unittest.TestCase):
     def setUp(self):
         (
-            self.bowling_cards,
             self.batting_cards,
             self.timings,
             self.runs,

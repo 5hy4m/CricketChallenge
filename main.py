@@ -1,9 +1,8 @@
 from constants import INTRO_STRING
 from input_parser import InputParser
 from constants import ChallengeSelectionChoices
-from prediction import PredictOutcome
+from predict_outcome import PredictOutcome
 from super_over import PredictSuperOver
-from output_parser import OutputParser
 
 
 def main():

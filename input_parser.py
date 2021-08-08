@@ -20,7 +20,6 @@ class InputParser:
             with open("outcome_chart.json") as f:
                 outcome_chart = json.load(f)
             return (
-                outcome_chart["bowling_cards"],
                 outcome_chart["batting_cards"],
                 outcome_chart["shot_time"],
                 outcome_chart["runs"],

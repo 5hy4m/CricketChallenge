@@ -8,8 +8,15 @@ class OutputParser:
             return f"1 wicket"
         if wickets_count == 0 or wickets_count == 1:
             return f"{wickets_count} wicket"
-        else:
-            return f"{wickets_count} wickets"
+        return f"{wickets_count} wickets"
+
+    @staticmethod
+    def is_integer(result):
+        return type(result) == int
+
+    @staticmethod
+    def print_bowling_details(bowler, bowl):
+        print(f"{bowler} bowled {bowl} ball,")
 
     @classmethod
     def result_string(cls, result):
@@ -18,16 +25,11 @@ class OutputParser:
                 return f"{result} run"
             else:
                 return f"{result} runs"
-        else:
-            return cls.wicket_string()
+        return cls.wicket_string()
 
     @classmethod
     def score_string(cls, result):
         return f"{COUNTRY_NAME} scored: {cls.result_string(result)}"
-
-    @staticmethod
-    def is_integer(result):
-        return type(result) == int
 
     @classmethod
     def won_string(cls, wickets_count):
@@ -54,10 +56,6 @@ class OutputParser:
     @classmethod
     def print_output_for_predict_outcome_with_comment(cls, comment, result):
         print(f"{comment} - {cls.result_string(result)}")
-
-    @classmethod
-    def print_bowling_details(cls, bowler, bowl):
-        print(f"{bowler} bowled {bowl} ball,")
 
     @classmethod
     def print_batting_details(cls, current_batsman, shot, timing):

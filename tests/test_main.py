@@ -28,7 +28,6 @@ class TestMainFlow(unittest.TestCase):
     def setUp(self):
         self.mocker = InputMock()
         (
-            self.bowling_cards,
             self.batting_cards,
             self.timings,
             self.runs,
