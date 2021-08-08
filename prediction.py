@@ -49,18 +49,28 @@ class SuperOver(Prediction):
                 OutputParser.print_super_over_won_output(self.score, self.wickets)
                 break
             current_batsman = self.batsmen_names[self.wickets]
-            self.shot, self.timing = self.parser.parse_input()
+            (
+                (
+                    printable_shot,
+                    self.shot,
+                ),
+                (
+                    printable_timing,
+                    self.timing,
+                ),
+            ) = self.parser.parse_input_with_printable_name()
             bowl = self.predict_bowl_type(self.shot)
             result = self.result()
             comment = self.comment(result)
             OutputParser.print_bowling_details(self.bowler_name, bowl)
-            OutputParser.print_batting_details(current_batsman, self.shot, self.timing)
+            OutputParser.print_batting_details(
+                current_batsman, printable_shot, printable_timing
+            )
             OutputParser.print_output_for_predict_outcome_with_comments(comment, result)
             self.remaining_balls -= 1
             if result == "wicket":
                 self.wickets += 1
                 if self.wickets >= self.maximum_wicket:
-                    OutputParser.print_super_over_lost_output(self.score, lost_by)
                     break
             else:
                 self.score += result

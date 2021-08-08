@@ -15,12 +15,12 @@ class MockChallenges:
     ]
 
     MOCK_INPUT_SUPER_OVER_PARSED_VALUES = [
-        ["STRAIGHT", "PERFECT"],
-        ["FLICK", "EARLY"],
-        ["HOOK", "GOOD"],
-        ["LEGGLANCE", "GOOD"],
-        ["LONGOFF", "LATE"],
-        ["LONGON", "PERFECT"],
+        [("Straight", "STRAIGHT"), ("Perfect", "PERFECT")],
+        [("Flick", "FLICK"), ("Early", "EARLY")],
+        [("Hook", "HOOK"), ("Good", "GOOD")],
+        [("LegGlance", "LEGGLANCE"), ("Good", "GOOD")],
+        [("LongOff", "LONGOFF"), ("Late", "LATE")],
+        [("LongOn", "LONGON"), ("Perfect", "PERFECT")],
     ]
     SUPER_OVER_BOWL_SIDE_EFFECTS = [
         "Inswinger",
@@ -45,8 +45,8 @@ class MockChallenges:
     SUPER_OVER_SIX_BALLS_OUTPUT = """Sudhakar bowled Inswinger ball,Craig played Perfect Straight shotExcellent drive - 4 runsSudhakar bowled Doosra ball,Craig played Early Flick shotHowzat! - 1 wicketSudhakar bowled Pace ball,Paul played Good Hook shotExcellent running between the wickets. - 1 runSudhakar bowled Inswinger ball,Paul played Good LegGlance shotThats sloppy work by the fielder - 2 runsSudhakar bowled Pace ball,Paul played Late LongOff shotTerrific fielding - 0 runSudhakar bowled Leg Cutter ball,Paul played Perfect LongOn shotIt’s a huge hit. - 6 runsAUSTRALIA scored: 13 runsAUSTRALIA won by 1 wicket"""
 
     MOCK_INPUT_SUPER_OVER_AFTER_TWO_WICKETS_SIDE_EFFECTS = [
-        ["STRAIGHT", "LATE"],
-        ["FLICK", "EARLY"],
+        [("Straight", "STRAIGHT"), ("Perfect", "PERFECT")],
+        [("Flick", "FLICK"), ("Early", "EARLY")],
     ]
 
     SUPER_OVER_AFTER_TWO_WICKETS_BOWL_SIDE_EFFECTS = ["Inswinger", "Doosra"]
@@ -57,6 +57,7 @@ class MockChallenges:
         "It’s a wicket.",
         "Edged and taken.",
     ]
+    SUPER_OVER_TWO_WICKETS_OUTPUT = """Sudhakar bowled Inswinger ball,Craig played Perfect Straight shotIt’s a wicket. - 1 wicketSudhakar bowled Doosra ball,Paul played Early Flick shotEdged and taken. - 1 wicketAUSTRALIA scored: 0 runAUSTRALIA lost by 11 runs"""
 
     # SUPER_OVER_CHALLENGE_RESULT = """Sudhakar bowled Bouncer ball,
     # Craig played Perfect Straight shot

@@ -96,7 +96,7 @@ class TestMainFlow(unittest.TestCase):
     @patch("prediction.Prediction.comment")
     @patch("prediction.Prediction.result")
     @patch("prediction.SuperOver.predict_bowl_type")
-    @patch("input_parser.InputParser.parse_input")
+    @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow(
         self,
@@ -128,7 +128,7 @@ class TestMainFlow(unittest.TestCase):
     @patch("prediction.Prediction.comment")
     @patch("prediction.Prediction.result")
     @patch("prediction.SuperOver.predict_bowl_type")
-    @patch("input_parser.InputParser.parse_input")
+    @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow_after_two_wickets(
         self,
@@ -143,18 +143,24 @@ class TestMainFlow(unittest.TestCase):
             ChallengeSelectionChoices.SUPER_OVER_CHALLENGE,
         )
         mock_input_for_super_over.side_effect = (
-            MockChallenges.MOCK_INPUT_SUPER_OVER_PARSED_VALUES
+            MockChallenges.MOCK_INPUT_SUPER_OVER_AFTER_TWO_WICKETS_SIDE_EFFECTS
         )
-        mock_bowl.side_effect = MockChallenges.SUPER_OVER_BOWL_SIDE_EFFECTS
-        mock_result.side_effect = MockChallenges.SUPER_OVER_RESULTS_SIDE_EFFECTS
-        mock_comment.side_effect = MockChallenges.SUPER_OVER_COMMENTS_SIDE_EFFECTS
+        mock_bowl.side_effect = (
+            MockChallenges.SUPER_OVER_AFTER_TWO_WICKETS_BOWL_SIDE_EFFECTS
+        )
+        mock_result.side_effect = (
+            MockChallenges.SUPER_OVER_AFTER_TWO_WICKETS_RESULTS_SIDE_EFFECTS
+        )
+        mock_comment.side_effect = (
+            MockChallenges.SUPER_OVER_AFTER_TWO_WICKETS_COMMENTS_SIDE_EFFECTS
+        )
         with patch("sys.stdout", new=StringIO()) as output:
             main()
             string = self.remove_intro_string(output)
             self.assertEqual.__self__.maxDiff = None
             self.assertEqual(
                 string,
-                MockChallenges.SUPER_OVER_SIX_BALLS_OUTPUT,
+                MockChallenges.SUPER_OVER_TWO_WICKETS_OUTPUT,
             )
 
     def test_super_over_challenge_output_for_won_output(self):

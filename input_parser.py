@@ -6,6 +6,10 @@ class InputParser:
         input_array = input().split(" ")
         return [string.upper() for string in input_array]
 
+    def parse_input_with_printable_name(self):
+        input_array = input().split(" ")
+        return [(string, string.upper()) for string in input_array]
+
     @staticmethod
     def parse_challenge_selection():
         return int(input())
