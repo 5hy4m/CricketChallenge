@@ -7,9 +7,9 @@ class ChallengeSelectionChoices:
 INTRO_STRING = """ 
 Please select any challenge 
 1.PredictOutcome
-2.Commentry 
+2.PredictOutcomeWithCommentry 
 3.SuperOver
-press the number accordingly."""
+press the corresponding number."""
 
 BATSMEN_NAMES = ["Craig", "Paul"]
 BOWLER_NAME = "Sudhakar"
