@@ -60,3 +60,9 @@ class OutputParser:
     @classmethod
     def print_batting_details(cls, current_batsman, shot, timing):
         print(f"{current_batsman} played {timing} {shot} shot")
+
+    @classmethod
+    def print_output_for_current_bowl(cls, result, printable_shot, printable_timing):
+        cls.print_bowling_details(self.bowler_name, bowl)
+        cls.print_batting_details(current_batsman, printable_shot, printable_timing)
+        cls.print_output_for_predict_outcome_with_comment(comment, result)

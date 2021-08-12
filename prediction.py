@@ -12,7 +12,13 @@ class Prediction:
         ) = self.parser.read_outcome_chart()
 
     def give_comment(self, result):
-        return random.choice(self.runs[str(result)]["probable_comments"])
+        try:
+            return random.choice(self.runs[str(result)]["probable_comments"])
+        except KeyError as err:
+            raise err
 
     def get_result_of_current_bowl(self):
-        return random.choice(self.timings[self.timing]["probable_runs"])
+        try:
+            return random.choice(self.timings[self.timing]["probable_runs"])
+        except KeyError as err:
+            raise err

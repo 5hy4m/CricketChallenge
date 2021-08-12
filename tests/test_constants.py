@@ -1,12 +1,14 @@
 class PredictOutComeConstants:
     MOCK_INPUT = "Bouncer Pull Perfect"
-
     PARSED_VALUES = ["BOUNCER", "PULL", "PERFECT"]
-
     PARSED_VALUES_2 = ["BOUNCER", "PULL", "LATE"]
+    ERROR_INPUT1 = "AWD AWD AWD AWD"
+    ERROR_INPUT2 = "AWD AWD"
+    ERROR_INPUT3 = ["AWD", "AWD", "AWD"]
 
 
 class SuperOverConstants:
+    MOCK_INPUT = "Straight Perfect"
     INPUT_SIDE_EFFECTS = [
         [("Straight", "STRAIGHT"), ("Perfect", "PERFECT")],
         [("Flick", "FLICK"), ("Early", "EARLY")],
@@ -23,9 +25,7 @@ class SuperOverConstants:
         "Pace",
         "Leg Cutter",
     ]
-
     RESULTS_SIDE_EFFECTS = [4, "wicket", 1, 2, 0, 6]
-
     COMMENTS_SIDE_EFFECTS = [
         "Excellent drive",
         "Howzat!",
@@ -34,7 +34,6 @@ class SuperOverConstants:
         "Terrific fielding",
         "It’s a huge hit.",
     ]
-
     OUTPUT = (
         "Sudhakar bowled Inswinger ball,"
         "Craig played Perfect Straight shot"
@@ -57,6 +56,8 @@ class SuperOverConstants:
         "AUSTRALIA scored: 13 runs"
         "AUSTRALIA won by 1 wicket"
     )
+    ERROR_INPUT1 = "I'm an error text"
+    ERROR_INPUT2 = "   "
 
 
 class SuperOverTwoWicketsConstants:

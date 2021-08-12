@@ -33,11 +33,23 @@ class TestChallenges(unittest.TestCase):
         )
 
     @mock.patch("input_parser.InputParser.parse_input")
+    def test_errors_of_predict_outcome(self, mock_input):
+        mock_input.return_value = PredictOutComeConstants.ERROR_INPUT3
+        with self.assertRaises(KeyError):
+            PredictOutcome().get_result_of_current_bowl()
+
+    @mock.patch("input_parser.InputParser.parse_input")
     def test_predict_outcome_with_comments(self, mock_input):
         mock_input.return_value = PredictOutComeConstants.PARSED_VALUES_2
         result = PredictOutcome().get_result_of_current_bowl()
         comment = PredictOutcome().give_comment(result)
         self.assertTrue(comment in self.runs[str(result)]["probable_comments"])
+
+    @mock.patch("input_parser.InputParser.parse_input")
+    def test_errors_of_predict_outcome(self, mock_input):
+        mock_input.return_value = PredictOutComeConstants.ERROR_INPUT3
+        with self.assertRaises(KeyError):
+            PredictOutcome().get_result_of_current_bowl()
 
     def test_super_over_challenge_predict_bowl_type(self):
         shot = "STRAIGHT"

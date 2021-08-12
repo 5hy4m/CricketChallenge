@@ -53,7 +53,11 @@ class PredictSuperOver(Prediction):
         while self.can_bowl():
             printable_shot, printable_timing = self.parse_input_values()
             result = self.get_result_of_current_bowl()
-            self.print_output_for_current_bowl(result, printable_shot, printable_timing)
+            self.print_output_for_current_bowl(
+                result,
+                printable_shot,
+                printable_timing,
+            )
             self.remaining_balls -= 1
             if result == "wicket":
                 self.wickets += 1

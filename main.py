@@ -14,6 +14,8 @@ def main():
         PredictOutcome().predict_with_comment()
     elif selection == ChallengeSelectionChoices.SUPER_OVER_CHALLENGE:
         PredictSuperOver().start_second_innings()
+    else:
+        raise ValueError(selection)
 
 
 if __name__ == "__main__":

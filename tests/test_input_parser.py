@@ -10,7 +10,7 @@ sys.path.append(parentdir)
 
 from constants import ChallengeSelectionChoices
 from input_parser import InputParser
-from tests.test_constants import PredictOutComeConstants
+from tests.test_constants import PredictOutComeConstants, SuperOverConstants
 
 
 class TestInputParser(unittest.TestCase):
@@ -42,3 +42,36 @@ class TestInputParser(unittest.TestCase):
             timing,
             PredictOutComeConstants.MOCK_INPUT.split(" ")[2].upper(),
         )
+
+    @mock.patch("builtins.input")
+    def test_errors_of_predict_outcome_input_parser(self, mock_input):
+        with self.assertRaises(ValueError):
+            mock_input.return_value = PredictOutComeConstants.ERROR_INPUT1
+            self.parser.parse_input()
+
+        with self.assertRaises(ValueError):
+            mock_input.return_value = PredictOutComeConstants.ERROR_INPUT2
+            self.parser.parse_input()
+
+    @mock.patch("builtins.input")
+    def test_super_over_input_parser(self, mock_input):
+        mock_input.return_value = SuperOverConstants.MOCK_INPUT
+        shot, timing = self.parser.parse_input_with_printable_name()
+        self.assertEqual(
+            shot,
+            SuperOverConstants.INPUT_SIDE_EFFECTS[0][0],
+        )
+        self.assertEqual(
+            timing,
+            SuperOverConstants.INPUT_SIDE_EFFECTS[0][1],
+        )
+
+    @mock.patch("builtins.input")
+    def test_errors_of_super_over_input_parser(self, mock_input):
+        with self.assertRaises(ValueError):
+            mock_input.return_value = SuperOverConstants.ERROR_INPUT1
+            self.parser.parse_input_with_printable_name()
+
+        with self.assertRaises(ValueError):
+            mock_input.return_value = SuperOverConstants.ERROR_INPUT2
+            self.parser.parse_input_with_printable_name()

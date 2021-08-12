@@ -1,18 +1,34 @@
 import json
+from error_constants import (
+    CHALLENGE_SELECTION_PARSE_ERROR,
+    PREDICT_OUTCOME_PARSE_ERROR,
+    SUPER_OVER_PARSE_ERROR,
+)
 
 
 class InputParser:
+    @staticmethod
+    def split_input_as_array():
+        return input().split(" ")
+
     def parse_input(self):
-        input_array = input().split(" ")
-        return [string.upper() for string in input_array]
+        input_array = self.split_input_as_array()
+        if len(input_array) == 3:
+            return [string.upper() for string in input_array]
+        raise ValueError(PREDICT_OUTCOME_PARSE_ERROR)
 
     def parse_input_with_printable_name(self):
-        input_array = input().split(" ")
-        return [(string, string.upper()) for string in input_array]
+        input_array = self.split_input_as_array()
+        if len(input_array) == 2:
+            return [(string, string.upper()) for string in input_array]
+        raise ValueError(SUPER_OVER_PARSE_ERROR)
 
     @staticmethod
     def parse_challenge_selection():
-        return int(input())
+        try:
+            return int(input())
+        except ValueError:
+            raise ValueError(CHALLENGE_SELECTION_PARSE_ERROR)
 
     @staticmethod
     def read_outcome_chart():
