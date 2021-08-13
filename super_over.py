@@ -9,41 +9,24 @@ class PredictSuperOver(Prediction):
     def __init__(self):
         super().__init__()
         self.score = 0
-        self.wickets = 0
+        self.wickets_taken = 0
         self.remaining_balls = 6
-        self.target = Setting.TARGET
-        self.maximum_wicket = Setting.MAXIMUM_WICKETS
-        self.batsmen_names = Setting.BATSMEN_NAMES
-        self.bowler_name = Setting.BOWLER_NAME
-        self.country_name = Setting.COUNTRY_NAME
+        self.played_shot = None
+        self.played_timing = None
 
     def start_second_innings(self):
         self.bowl_six_balls()
         if self.is_target_achieved():
-            balance_wickets = self.maximum_wicket - self.wickets
-            OutputParser.print_super_over_won_output(self.score, balance_wickets)
+            OutputParser.print_super_over_won_output(self.score, self.wickets_taken)
             return
-        lost_by = self.target - self.score
-        OutputParser.print_super_over_lost_output(self.score, lost_by)
+        OutputParser.print_super_over_lost_output(self.score)
 
     def bowl_six_balls(self):
         while self.can_bowl():
-            self.remaining_balls -= 1
             self.set_shot_and_timing_values_from_input()
-            result = self.get_result_of_current_bowl()
-            # self.print_output_for_current_bowl(result)
-            current_batsman = self.batsmen_names[self.wickets]
-            bowl = self.predict_bowl_type(self.shot["key"])
-            OutputParser.print_bowling_details(self.bowler_name, bowl)
-            OutputParser.print_batting_details(
-                current_batsman, self.shot["name"], self.timing["name"]
-            )
-            comment = self.get_comment(result)
-            OutputParser.print_output_for_predict_outcome_with_comment(comment, result)
-            if result == "wicket":
-                self.wickets += 1
-                continue
-            self.score += result
+            self.bowl_outcome = self.predict_outcome_using_shot_timing()
+            self.process_commentry_for_current_ball()
+            self.prepare_for_next_bowl()
 
     def can_bowl(self):
         return (
@@ -53,26 +36,41 @@ class PredictSuperOver(Prediction):
         )
 
     def is_target_achieved(self):
-        return self.score > self.target
+        return self.score > Setting.TARGET
 
     def is_all_out(self):
-        return self.wickets >= self.maximum_wicket
+        return self.wickets_taken >= Setting.MAXIMUM_WICKETS
 
     def set_shot_and_timing_values_from_input(self):
         try:
-            self.shot, self.timing = self.parser.parse_input_with_printable_name()
+            (
+                self.played_shot,
+                self.played_timing,
+            ) = self.parser.parse_input_with_printable_name()
         except ValueError:
             raise ValueError(SUPER_OVER_PARSE_ERROR)
 
-    def predict_bowl_type(self, shot):
-        return random.choice(self.batting_cards[shot]["probable_bowl"])
+    def prepare_for_next_bowl(self):
+        self.remaining_balls -= 1
+        if self.is_wicket(self.bowl_outcome):
+            self.wickets_taken += 1
+        else:
+            self.score += self.bowl_outcome
 
-    def print_output_for_current_bowl(self, result):
-        current_batsman = self.batsmen_names[self.wickets]
-        bowl = self.predict_bowl_type(self.shot["key"])
-        OutputParser.print_bowling_details(self.bowler_name, bowl)
+    def process_commentry_for_current_ball(self):
+        bowl = self.predict_bowl_type_using_shot_type(self.played_shot["key"])
+        comment = self.predict_comment_using_bowl_outcome(self.bowl_outcome)
+        OutputParser.print_bowling_details(bowl)
         OutputParser.print_batting_details(
-            current_batsman, self.shot["name"], self.timing["name"]
+            self.wickets_taken,
+            self.played_shot["name"],
+            self.played_timing["name"],
         )
-        comment = self.get_comment(result)
-        OutputParser.print_output_for_predict_outcome_with_comment(comment, result)
+        OutputParser.print_output_for_outcome_with_comment(
+            comment,
+            self.bowl_outcome,
+        )
+
+    @staticmethod
+    def is_wicket(outcome):
+        return outcome == "wicket"

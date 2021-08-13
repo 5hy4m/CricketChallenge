@@ -1,5 +1,6 @@
 import random
 from input_parser import InputParser
+from output_parser import OutputParser
 
 
 class Prediction:
@@ -7,18 +8,25 @@ class Prediction:
         self.parser = InputParser()
         (
             self.batting_cards,
-            self.timings,
+            self.shot_timings,
             self.runs,
         ) = self.parser.read_outcome_chart()
 
-    def get_comment(self, result):
+    def predict_comment_using_bowl_outcome(self, result):
         try:
             return random.choice(self.runs[str(result)]["probable_comments"])
         except KeyError as err:
             raise err
 
-    def get_result_of_current_bowl(self):
+    def predict_outcome_using_shot_timing(self):
         try:
-            return random.choice(self.timings[self.timing]["probable_runs"])
+            # TODO Check THe name of the Vars Here Timing and shot_timings
+            return random.choice(self.shot_timings[self.played_timing]["probable_runs"])
+        except KeyError as err:
+            raise err
+
+    def predict_bowl_type_using_shot_type(self, played_shot):
+        try:
+            return random.choice(self.batting_cards[played_shot]["probable_bowl"])
         except KeyError as err:
             raise err

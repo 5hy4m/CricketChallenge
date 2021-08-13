@@ -31,17 +31,17 @@ class TestInputParser(unittest.TestCase):
     @mock.patch("builtins.input")
     def test_predict_outcome_input_parser(self, mock_input):
         mock_input.return_value = PredictOutComeConstants.MOCK_INPUT
-        bowl, shot, timing = self.parser.parse_input()
+        bowl, played_shot, played_timing = self.parser.parse_input()
         self.assertEqual(
             bowl,
             PredictOutComeConstants.MOCK_INPUT.split(" ")[0].upper(),
         )
         self.assertEqual(
-            shot,
+            played_shot,
             PredictOutComeConstants.MOCK_INPUT.split(" ")[1].upper(),
         )
         self.assertEqual(
-            timing,
+            played_timing,
             PredictOutComeConstants.MOCK_INPUT.split(" ")[2].upper(),
         )
 
@@ -58,13 +58,13 @@ class TestInputParser(unittest.TestCase):
     @mock.patch("builtins.input")
     def test_super_over_input_parser(self, mock_input):
         mock_input.return_value = SuperOverConstants.MOCK_INPUT
-        shot, timing = self.parser.parse_input_with_printable_name()
+        played_shot, played_timing = self.parser.parse_input_with_printable_name()
         self.assertEqual(
-            shot,
+            played_shot,
             SuperOverConstants.INPUT_SIDE_EFFECTS[0][0],
         )
         self.assertEqual(
-            timing,
+            played_timing,
             SuperOverConstants.INPUT_SIDE_EFFECTS[0][1],
         )
 

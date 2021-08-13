@@ -29,9 +29,10 @@ class OutputParser:
         return f"{wickets_count} wickets"
 
     @classmethod
-    def print_super_over_won_output(cls, score, wicket):
+    def print_super_over_won_output(cls, score, wickets_taken):
+        balance_wickets = Setting.MAXIMUM_WICKETS - wickets_taken
         print(cls.score_string(score))
-        print(cls.won_string(wicket))
+        print(cls.won_string(balance_wickets))
 
     @classmethod
     def score_string(cls, result):
@@ -42,7 +43,8 @@ class OutputParser:
         return f"{Setting.COUNTRY_NAME} won by {cls.wicket_string(wickets_count)}"
 
     @classmethod
-    def print_super_over_lost_output(cls, score, lost_by):
+    def print_super_over_lost_output(cls, score):
+        lost_by = Setting.TARGET - score
         print(cls.score_string(score))
         print(cls.lost_string(lost_by))
 
@@ -51,13 +53,24 @@ class OutputParser:
         return f"{Setting.COUNTRY_NAME} lost by {cls.result_string(score)}"
 
     @classmethod
-    def print_output_for_predict_outcome_with_comment(cls, comment, result):
+    def print_output_for_outcome_with_comment(cls, comment, result):
         print(f"{comment} - {cls.result_string(result)}")
 
     @classmethod
-    def print_batting_details(cls, current_batsman, shot, timing):
-        print(f"{current_batsman} played {timing} {shot} shot")
+    def print_batting_details(cls, wickets_taken, played_shot, played_timing):
+        current_batsman = Setting.BATSMEN_NAMES[wickets_taken]
+        print(f"{current_batsman} played {played_timing} {played_shot} shot")
 
     @staticmethod
-    def print_bowling_details(bowler, bowl):
-        print(f"{bowler} bowled {bowl} ball,")
+    def print_bowling_details(bowl):
+        print(f"{Setting.BOWLER_NAME} bowled {bowl} ball,")
+
+    @classmethod
+    def print_output_for_a_bowl_in_super_over(
+        cls, wickets_taken, played_shot, played_timing, bowl_outcome, bowl, comment
+    ):
+        cls.print_bowling_details(bowl)
+        cls.print_batting_details(
+            wickets_taken, played_shot["name"], played_timing["name"]
+        )
+        cls.print_output_for_outcome_with_comment(comment, bowl_outcome)

@@ -7,15 +7,15 @@ class PredictOutcome(Prediction):
     def __init__(self):
         super().__init__()
         try:
-            self.bowl, self.shot, self.timing = self.parser.parse_input()
+            self.bowl, self.played_shot, self.played_timing = self.parser.parse_input()
         except ValueError:
             raise ValueError(PREDICT_OUTCOME_PARSE_ERROR)
 
     def predict(self):
-        result = self.get_result_of_current_bowl()
-        OutputParser.print_output_for_predict_outcome(result)
+        bowl_outcome = self.predict_outcome_using_shot_timing()
+        OutputParser.print_output_for_predict_outcome(bowl_outcome)
 
     def predict_with_comment(self):
-        result = self.get_result_of_current_bowl()
-        comment = self.get_comment(result)
-        OutputParser.print_output_for_predict_outcome_with_comment(comment, result)
+        bowl_outcome = self.predict_outcome_using_shot_timing()
+        comment = self.predict_comment_using_bowl_outcome(bowl_outcome)
+        OutputParser.print_output_for_outcome_with_comment(comment, bowl_outcome)

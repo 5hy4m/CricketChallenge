@@ -35,7 +35,7 @@ class TestMainFlow(unittest.TestCase):
     def setUp(self):
         (
             self.batting_cards,
-            self.timings,
+            self.shot_timings,
             self.runs,
         ) = InputParser().read_outcome_chart()
 
@@ -83,11 +83,10 @@ class TestMainFlow(unittest.TestCase):
 
     def test_super_over_challenge_output_for_each_ball(self):
         with patch("sys.stdout", new=StringIO()) as output:
-            OutputParser.print_bowling_details(Setting.BOWLER_NAME, "Bouncer")
-            OutputParser.print_batting_details(
-                Setting.BATSMEN_NAMES[0], "Straight", "Perfect"
-            )
-            OutputParser.print_output_for_predict_outcome_with_comment(
+            wickets_taken = 0
+            OutputParser.print_bowling_details("Bouncer")
+            OutputParser.print_batting_details(wickets_taken, "Straight", "Perfect")
+            OutputParser.print_output_for_outcome_with_comment(
                 "Excellent line and length", 1
             )
             string = self.remove_intro_string(output)
@@ -96,9 +95,9 @@ class TestMainFlow(unittest.TestCase):
                 f"""{Setting.BOWLER_NAME} bowled Bouncer ball,{Setting.BATSMEN_NAMES[0]} played Perfect Straight shotExcellent line and length - 1 run""",
             )
 
-    @patch("prediction.Prediction.get_comment")
-    @patch("prediction.Prediction.get_result_of_current_bowl")
-    @patch("super_over.PredictSuperOver.predict_bowl_type")
+    @patch("prediction.Prediction.predict_comment_using_bowl_outcome")
+    @patch("prediction.Prediction.predict_outcome_using_shot_timing")
+    @patch("super_over.PredictSuperOver.predict_bowl_type_using_shot_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow(
@@ -125,9 +124,9 @@ class TestMainFlow(unittest.TestCase):
                 SuperOverConstants.OUTPUT,
             )
 
-    @patch("prediction.Prediction.get_comment")
-    @patch("prediction.Prediction.get_result_of_current_bowl")
-    @patch("super_over.PredictSuperOver.predict_bowl_type")
+    @patch("prediction.Prediction.predict_comment_using_bowl_outcome")
+    @patch("prediction.Prediction.predict_outcome_using_shot_timing")
+    @patch("super_over.PredictSuperOver.predict_bowl_type_using_shot_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow_after_two_wickets(
@@ -156,9 +155,9 @@ class TestMainFlow(unittest.TestCase):
                 SuperOverTwoWicketsConstants.OUTPUT,
             )
 
-    @patch("prediction.Prediction.get_comment")
-    @patch("prediction.Prediction.get_result_of_current_bowl")
-    @patch("super_over.PredictSuperOver.predict_bowl_type")
+    @patch("prediction.Prediction.predict_comment_using_bowl_outcome")
+    @patch("prediction.Prediction.predict_outcome_using_shot_timing")
+    @patch("super_over.PredictSuperOver.predict_bowl_type_using_shot_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
     @patch("input_parser.InputParser.parse_challenge_selection")
     def test_super_over_challenge_flow_with_three_balls_victory(
@@ -191,18 +190,22 @@ class TestMainFlow(unittest.TestCase):
 
     def test_super_over_challenge_output_for_won_output(self):
         with patch("sys.stdout", new=StringIO()) as output:
-            OutputParser.print_super_over_won_output(22, 1)
+            OutputParser.print_super_over_won_output(12, 1)
             string = self.remove_intro_string(output)
             self.assertEqual(
                 string,
-                f"""AUSTRALIA scored: 22 runsAUSTRALIA won by 1 wicket""",
+                f"""AUSTRALIA scored: 12 runsAUSTRALIA won by 1 wicket""",
             )
 
     def test_super_over_challenge_output_for_lost_output(self):
         with patch("sys.stdout", new=StringIO()) as output:
-            OutputParser.print_super_over_lost_output(18, 2)
+            OutputParser.print_super_over_lost_output(9)
             string = self.remove_intro_string(output)
             self.assertEqual(
                 string,
-                f"""AUSTRALIA scored: 18 runsAUSTRALIA lost by 2 runs""",
+                f"""AUSTRALIA scored: 9 runsAUSTRALIA lost by 2 runs""",
             )
+
+
+if __name__ == "__main__":
+    unittest.main()
