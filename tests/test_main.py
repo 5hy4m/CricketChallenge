@@ -14,11 +14,7 @@ from constants import (
     ChallengeSelectionChoices,
     INTRO_STRING,
 )
-from match_settings import (
-    BATSMEN_NAMES,
-    BOWLER_NAME,
-    COUNTRY_NAME,
-)
+from match_settings import Setting
 from input_parser import InputParser
 from tests.test_constants import (
     PredictOutComeConstants,
@@ -30,6 +26,11 @@ from main import main
 from output_parser import OutputParser
 
 
+@patch("match_settings.Setting.BATSMEN_NAMES", ["Craig", "Paul"])
+@patch("match_settings.Setting.BOWLER_NAME", "Sudhakar")
+@patch("match_settings.Setting.COUNTRY_NAME", "AUSTRALIA")
+@patch("match_settings.Setting.TARGET", 11)
+@patch("match_settings.Setting.MAXIMUM_WICKETS", 2)
 class TestMainFlow(unittest.TestCase):
     def setUp(self):
         (
@@ -82,15 +83,17 @@ class TestMainFlow(unittest.TestCase):
 
     def test_super_over_challenge_output_for_each_ball(self):
         with patch("sys.stdout", new=StringIO()) as output:
-            OutputParser.print_bowling_details(BOWLER_NAME, "Bouncer")
-            OutputParser.print_batting_details(BATSMEN_NAMES[0], "Straight", "Perfect")
+            OutputParser.print_bowling_details(Setting.BOWLER_NAME, "Bouncer")
+            OutputParser.print_batting_details(
+                Setting.BATSMEN_NAMES[0], "Straight", "Perfect"
+            )
             OutputParser.print_output_for_predict_outcome_with_comment(
                 "Excellent line and length", 1
             )
             string = self.remove_intro_string(output)
             self.assertEqual(
                 string,
-                f"""{BOWLER_NAME} bowled Bouncer ball,{BATSMEN_NAMES[0]} played Perfect Straight shotExcellent line and length - 1 run""",
+                f"""{Setting.BOWLER_NAME} bowled Bouncer ball,{Setting.BATSMEN_NAMES[0]} played Perfect Straight shotExcellent line and length - 1 run""",
             )
 
     @patch("prediction.Prediction.get_comment")

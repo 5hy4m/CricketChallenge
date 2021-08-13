@@ -1,21 +1,21 @@
 import random
 from output_parser import OutputParser
-from match_settings import BOWLER_NAME, BATSMEN_NAMES, COUNTRY_NAME
 from prediction import Prediction
 from error_constants import SUPER_OVER_PARSE_ERROR
+from match_settings import Setting
 
 
 class PredictSuperOver(Prediction):
     def __init__(self):
         super().__init__()
+        self.score = 0
         self.wickets = 0
         self.remaining_balls = 6
-        self.target = 11
-        self.score = 0
-        self.maximum_wicket = 2
-        self.batsmen_names = BATSMEN_NAMES
-        self.bowler_name = BOWLER_NAME
-        self.country_name = COUNTRY_NAME
+        self.target = Setting.TARGET
+        self.maximum_wicket = Setting.MAXIMUM_WICKETS
+        self.batsmen_names = Setting.BATSMEN_NAMES
+        self.bowler_name = Setting.BOWLER_NAME
+        self.country_name = Setting.COUNTRY_NAME
 
     def start_second_innings(self):
         self.bowl_six_balls()

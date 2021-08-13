@@ -1,4 +1,4 @@
-from match_settings import COUNTRY_NAME
+from match_settings import Setting
 
 
 class OutputParser:
@@ -35,11 +35,11 @@ class OutputParser:
 
     @classmethod
     def score_string(cls, result):
-        return f"{COUNTRY_NAME} scored: {cls.result_string(result)}"
+        return f"{Setting.COUNTRY_NAME} scored: {cls.result_string(result)}"
 
     @classmethod
     def won_string(cls, wickets_count):
-        return f"{COUNTRY_NAME} won by {cls.wicket_string(wickets_count)}"
+        return f"{Setting.COUNTRY_NAME} won by {cls.wicket_string(wickets_count)}"
 
     @classmethod
     def print_super_over_lost_output(cls, score, lost_by):
@@ -48,7 +48,7 @@ class OutputParser:
 
     @classmethod
     def lost_string(cls, score):
-        return f"{COUNTRY_NAME} lost by {cls.result_string(score)}"
+        return f"{Setting.COUNTRY_NAME} lost by {cls.result_string(score)}"
 
     @classmethod
     def print_output_for_predict_outcome_with_comment(cls, comment, result):
