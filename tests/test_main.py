@@ -13,6 +13,8 @@ sys.path.append(parentdir)
 from constants import (
     ChallengeSelectionChoices,
     INTRO_STRING,
+)
+from match_settings import (
     BATSMEN_NAMES,
     BOWLER_NAME,
     COUNTRY_NAME,

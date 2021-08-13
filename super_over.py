@@ -1,6 +1,6 @@
 import random
 from output_parser import OutputParser
-from constants import BOWLER_NAME, BATSMEN_NAMES, COUNTRY_NAME
+from match_settings import BOWLER_NAME, BATSMEN_NAMES, COUNTRY_NAME
 from prediction import Prediction
 from error_constants import SUPER_OVER_PARSE_ERROR
 

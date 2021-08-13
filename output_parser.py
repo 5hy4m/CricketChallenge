@@ -1,4 +1,4 @@
-from constants import COUNTRY_NAME
+from match_settings import COUNTRY_NAME
 
 
 class OutputParser:

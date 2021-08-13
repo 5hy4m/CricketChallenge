@@ -1,0 +1,3 @@
+BATSMEN_NAMES = ["Craig", "Paul"]
+BOWLER_NAME = "Sudhakar"
+COUNTRY_NAME = "AUSTRALIA"
