@@ -10,12 +10,15 @@ class PredictOutComeConstants:
 class SuperOverConstants:
     MOCK_INPUT = "Straight Perfect"
     INPUT_SIDE_EFFECTS = [
-        [("Straight", "STRAIGHT"), ("Perfect", "PERFECT")],
-        [("Flick", "FLICK"), ("Early", "EARLY")],
-        [("Hook", "HOOK"), ("Good", "GOOD")],
-        [("LegGlance", "LEGGLANCE"), ("Good", "GOOD")],
-        [("LongOff", "LONGOFF"), ("Late", "LATE")],
-        [("LongOn", "LONGON"), ("Perfect", "PERFECT")],
+        [
+            {"name": "Straight", "key": "STRAIGHT"},
+            {"name": "Perfect", "key": "PERFECT"},
+        ],
+        [{"name": "Flick", "key": "FLICK"}, {"name": "Early", "key": "EARLY"}],
+        [{"name": "Hook", "key": "HOOK"}, {"name": "Good", "key": "GOOD"}],
+        [{"name": "LegGlance", "key": "LEGGLANCE"}, {"name": "Good", "key": "GOOD"}],
+        [{"name": "LongOff", "key": "LONGOFF"}, {"name": "Late", "key": "LATE"}],
+        [{"name": "LongOn", "key": "LONGON"}, {"name": "Perfect", "key": "PERFECT"}],
     ]
     BOWL_SIDE_EFFECTS = [
         "Inswinger",
@@ -62,8 +65,11 @@ class SuperOverConstants:
 
 class SuperOverTwoWicketsConstants:
     INPUT_SIDE_EFFECTS = [
-        [("Straight", "STRAIGHT"), ("Perfect", "PERFECT")],
-        [("Flick", "FLICK"), ("Early", "EARLY")],
+        [
+            {"name": "Straight", "key": "STRAIGHT"},
+            {"name": "Perfect", "key": "PERFECT"},
+        ],
+        [{"name": "Flick", "key": "FLICK"}, {"name": "Early", "key": "EARLY"}],
     ]
 
     BOWL_SIDE_EFFECTS = ["Inswinger", "Doosra"]
@@ -89,9 +95,12 @@ class SuperOverTwoWicketsConstants:
 
 class SuperOverThreeBallsVictoryConstants:
     INPUT_SIDE_EFFECTS = [
-        [("Straight", "STRAIGHT"), ("Perfect", "PERFECT")],
-        [("Flick", "FLICK"), ("Perfect", "PERFECT")],
-        [("Hook", "HOOK"), ("Perfect", "PERFECT")],
+        [
+            {"name": "Straight", "key": "STRAIGHT"},
+            {"name": "Perfect", "key": "PERFECT"},
+        ],
+        [{"name": "Flick", "key": "FLICK"}, {"name": "Perfect", "key": "PERFECT"}],
+        [{"name": "Hook", "key": "HOOK"}, {"name": "Perfect", "key": "PERFECT"}],
     ]
 
     BOWL_SIDE_EFFECTS = [

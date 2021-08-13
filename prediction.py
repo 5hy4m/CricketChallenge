@@ -11,7 +11,7 @@ class Prediction:
             self.runs,
         ) = self.parser.read_outcome_chart()
 
-    def give_comment(self, result):
+    def get_comment(self, result):
         try:
             return random.choice(self.runs[str(result)]["probable_comments"])
         except KeyError as err:

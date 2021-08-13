@@ -11,6 +11,8 @@ sys.path.append(parentdir)
 from constants import ChallengeSelectionChoices
 from input_parser import InputParser
 from tests.test_constants import PredictOutComeConstants, SuperOverConstants
+from super_over import PredictSuperOver
+from predict_outcome import PredictOutcome
 
 
 class TestInputParser(unittest.TestCase):
@@ -47,11 +49,11 @@ class TestInputParser(unittest.TestCase):
     def test_errors_of_predict_outcome_input_parser(self, mock_input):
         with self.assertRaises(ValueError):
             mock_input.return_value = PredictOutComeConstants.ERROR_INPUT1
-            self.parser.parse_input()
+            PredictOutcome()
 
         with self.assertRaises(ValueError):
             mock_input.return_value = PredictOutComeConstants.ERROR_INPUT2
-            self.parser.parse_input()
+            PredictOutcome()
 
     @mock.patch("builtins.input")
     def test_super_over_input_parser(self, mock_input):
@@ -70,8 +72,12 @@ class TestInputParser(unittest.TestCase):
     def test_errors_of_super_over_input_parser(self, mock_input):
         with self.assertRaises(ValueError):
             mock_input.return_value = SuperOverConstants.ERROR_INPUT1
-            self.parser.parse_input_with_printable_name()
+            PredictSuperOver().set_input_values()
 
         with self.assertRaises(ValueError):
             mock_input.return_value = SuperOverConstants.ERROR_INPUT2
-            self.parser.parse_input_with_printable_name()
+            PredictSuperOver().set_input_values()
+
+
+if __name__ == "__main__":
+    unittest.main()

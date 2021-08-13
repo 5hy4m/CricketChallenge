@@ -91,7 +91,7 @@ class TestMainFlow(unittest.TestCase):
                 f"""{BOWLER_NAME} bowled Bouncer ball,{BATSMEN_NAMES[0]} played Perfect Straight shotExcellent line and length - 1 run""",
             )
 
-    @patch("prediction.Prediction.give_comment")
+    @patch("prediction.Prediction.get_comment")
     @patch("prediction.Prediction.get_result_of_current_bowl")
     @patch("super_over.PredictSuperOver.predict_bowl_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
@@ -120,7 +120,7 @@ class TestMainFlow(unittest.TestCase):
                 SuperOverConstants.OUTPUT,
             )
 
-    @patch("prediction.Prediction.give_comment")
+    @patch("prediction.Prediction.get_comment")
     @patch("prediction.Prediction.get_result_of_current_bowl")
     @patch("super_over.PredictSuperOver.predict_bowl_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")
@@ -151,7 +151,7 @@ class TestMainFlow(unittest.TestCase):
                 SuperOverTwoWicketsConstants.OUTPUT,
             )
 
-    @patch("prediction.Prediction.give_comment")
+    @patch("prediction.Prediction.get_comment")
     @patch("prediction.Prediction.get_result_of_current_bowl")
     @patch("super_over.PredictSuperOver.predict_bowl_type")
     @patch("input_parser.InputParser.parse_input_with_printable_name")

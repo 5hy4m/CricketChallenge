@@ -42,7 +42,7 @@ class TestChallenges(unittest.TestCase):
     def test_predict_outcome_with_comments(self, mock_input):
         mock_input.return_value = PredictOutComeConstants.PARSED_VALUES_2
         result = PredictOutcome().get_result_of_current_bowl()
-        comment = PredictOutcome().give_comment(result)
+        comment = PredictOutcome().get_comment(result)
         self.assertTrue(comment in self.runs[str(result)]["probable_comments"])
 
     @mock.patch("input_parser.InputParser.parse_input")
