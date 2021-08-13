@@ -72,11 +72,11 @@ class TestInputParser(unittest.TestCase):
     def test_errors_of_super_over_input_parser(self, mock_input):
         with self.assertRaises(ValueError):
             mock_input.return_value = SuperOverConstants.ERROR_INPUT1
-            PredictSuperOver().set_input_values()
+            PredictSuperOver().set_shot_and_timing_values_from_input()
 
         with self.assertRaises(ValueError):
             mock_input.return_value = SuperOverConstants.ERROR_INPUT2
-            PredictSuperOver().set_input_values()
+            PredictSuperOver().set_shot_and_timing_values_from_input()
 
 
 if __name__ == "__main__":

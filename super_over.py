@@ -29,9 +29,17 @@ class PredictSuperOver(Prediction):
     def bowl_six_balls(self):
         while self.can_bowl():
             self.remaining_balls -= 1
-            self.set_input_values()
+            self.set_shot_and_timing_values_from_input()
             result = self.get_result_of_current_bowl()
-            self.print_output_for_current_bowl(result)
+            # self.print_output_for_current_bowl(result)
+            current_batsman = self.batsmen_names[self.wickets]
+            bowl = self.predict_bowl_type(self.shot["key"])
+            OutputParser.print_bowling_details(self.bowler_name, bowl)
+            OutputParser.print_batting_details(
+                current_batsman, self.shot["name"], self.timing["name"]
+            )
+            comment = self.get_comment(result)
+            OutputParser.print_output_for_predict_outcome_with_comment(comment, result)
             if result == "wicket":
                 self.wickets += 1
                 continue
@@ -50,7 +58,7 @@ class PredictSuperOver(Prediction):
     def is_all_out(self):
         return self.wickets >= self.maximum_wicket
 
-    def set_input_values(self):
+    def set_shot_and_timing_values_from_input(self):
         try:
             self.shot, self.timing = self.parser.parse_input_with_printable_name()
         except ValueError:
@@ -62,9 +70,9 @@ class PredictSuperOver(Prediction):
     def print_output_for_current_bowl(self, result):
         current_batsman = self.batsmen_names[self.wickets]
         bowl = self.predict_bowl_type(self.shot["key"])
-        comment = self.get_comment(result)
         OutputParser.print_bowling_details(self.bowler_name, bowl)
         OutputParser.print_batting_details(
             current_batsman, self.shot["name"], self.timing["name"]
         )
+        comment = self.get_comment(result)
         OutputParser.print_output_for_predict_outcome_with_comment(comment, result)
