@@ -20,13 +20,16 @@ class Prediction:
 
     def predict_outcome_using_shot_timing(self):
         try:
-            # TODO Check THe name of the Vars Here Timing and shot_timings
-            return random.choice(self.shot_timings[self.played_timing]["probable_runs"])
+            return random.choice(
+                self.shot_timings[self.played_timing["key"]]["probable_runs"]
+            )
         except KeyError as err:
             raise err
 
-    def predict_bowl_type_using_shot_type(self, played_shot):
+    def predict_bowl_type_using_shot_type(self):
         try:
-            return random.choice(self.batting_cards[played_shot]["probable_bowl"])
+            return random.choice(
+                self.batting_cards[self.played_shot["key"]]["probable_bowl"]
+            )
         except KeyError as err:
             raise err

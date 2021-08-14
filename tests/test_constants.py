@@ -1,10 +1,22 @@
 class PredictOutComeConstants:
     MOCK_INPUT = "Bouncer Pull Perfect"
-    PARSED_VALUES = ["BOUNCER", "PULL", "PERFECT"]
-    PARSED_VALUES_2 = ["BOUNCER", "PULL", "LATE"]
+    PARSED_VALUES = [
+        {"name": "Bouncer", "key": "BOUNCER"},
+        {"name": "Pull", "key": "PULL"},
+        {"name": "Perfect", "key": "PERFECT"},
+    ]
+    PARSED_VALUES_2 = [
+        {"name": "Bouncer", "key": "BOUNCER"},
+        {"name": "Pull", "key": "PULL"},
+        {"name": "Late", "key": "LATE"},
+    ]
     ERROR_INPUT1 = "AWD AWD AWD AWD"
     ERROR_INPUT2 = "AWD AWD"
-    ERROR_INPUT3 = ["AWD", "AWD", "AWD"]
+    ERROR_INPUT3 = [
+        {"name": "awd", "key": "AWD"},
+        {"name": "awd", "key": "AWD"},
+        {"name": "awd", "key": "AWD"},
+    ]
 
 
 class SuperOverConstants:

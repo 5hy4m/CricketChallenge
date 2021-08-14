@@ -21,6 +21,9 @@ class TestInputParser(unittest.TestCase):
 
     @mock.patch("builtins.input")
     def test_challenge_selection_parser(self, mock_input):
+        """
+        Check valid input for challenge selection input parser.
+        """
         mock_input.return_value = ChallengeSelectionChoices.PREDICT_OUTCOME_CHALLENGE
         selection = self.parser.parse_challenge_selection()
         self.assertEqual(
@@ -30,23 +33,49 @@ class TestInputParser(unittest.TestCase):
 
     @mock.patch("builtins.input")
     def test_predict_outcome_input_parser(self, mock_input):
+        """
+        Check valid input for predict outcome input parser.
+        """
         mock_input.return_value = PredictOutComeConstants.MOCK_INPUT
-        bowl, played_shot, played_timing = self.parser.parse_input()
+        bowl, played_shot, played_timing = self.parser.parse_input_with_printable_name()
         self.assertEqual(
             bowl,
-            PredictOutComeConstants.MOCK_INPUT.split(" ")[0].upper(),
+            {
+                "name": PredictOutComeConstants.MOCK_INPUT.split(" ")[0],
+                "key": PredictOutComeConstants.MOCK_INPUT.split(" ")[0].upper(),
+            },
         )
         self.assertEqual(
             played_shot,
-            PredictOutComeConstants.MOCK_INPUT.split(" ")[1].upper(),
+            {
+                "name": PredictOutComeConstants.MOCK_INPUT.split(" ")[1],
+                "key": PredictOutComeConstants.MOCK_INPUT.split(" ")[1].upper(),
+            },
         )
         self.assertEqual(
             played_timing,
-            PredictOutComeConstants.MOCK_INPUT.split(" ")[2].upper(),
+            {
+                "name": PredictOutComeConstants.MOCK_INPUT.split(" ")[2],
+                "key": PredictOutComeConstants.MOCK_INPUT.split(" ")[2].upper(),
+            },
         )
+
+    @mock.patch("input_parser.parse_input_with_printable_name")
+    def test_errors_of_predict_outcome_using_shot_timing(self, mock_input):
+        """
+        Check KeyError in predict_outcome_input_parser
+        when invalid input is provided.
+        """
+        mock_input.return_value = PredictOutComeConstants.ERROR_INPUT3
+        with self.assertRaises(KeyError):
+            PredictOutcome().predict_outcome_using_shot_timing()
 
     @mock.patch("builtins.input")
     def test_errors_of_predict_outcome_input_parser(self, mock_input):
+        """
+        Check KeyError in predict_outcome_input_parser
+        when insufficient input is provided.
+        """
         with self.assertRaises(ValueError):
             mock_input.return_value = PredictOutComeConstants.ERROR_INPUT1
             PredictOutcome()
@@ -57,6 +86,9 @@ class TestInputParser(unittest.TestCase):
 
     @mock.patch("builtins.input")
     def test_super_over_input_parser(self, mock_input):
+        """
+        Check valid input for super over input parser.
+        """
         mock_input.return_value = SuperOverConstants.MOCK_INPUT
         played_shot, played_timing = self.parser.parse_input_with_printable_name()
         self.assertEqual(
@@ -70,6 +102,10 @@ class TestInputParser(unittest.TestCase):
 
     @mock.patch("builtins.input")
     def test_errors_of_super_over_input_parser(self, mock_input):
+        """
+        Check KeyError in super_over_input_parser
+        when insufficient input is provided.
+        """
         with self.assertRaises(ValueError):
             mock_input.return_value = SuperOverConstants.ERROR_INPUT1
             PredictSuperOver().set_shot_and_timing_values_from_input()

@@ -7,7 +7,11 @@ class PredictOutcome(Prediction):
     def __init__(self):
         super().__init__()
         try:
-            self.bowl, self.played_shot, self.played_timing = self.parser.parse_input()
+            (
+                self.bowl,
+                self.played_shot,
+                self.played_timing,
+            ) = self.parser.parse_input_with_printable_name()
         except ValueError:
             raise ValueError(PREDICT_OUTCOME_PARSE_ERROR)
 

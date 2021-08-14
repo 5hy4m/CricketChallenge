@@ -43,11 +43,14 @@ class TestMainFlow(unittest.TestCase):
         string = output.getvalue().replace(INTRO_STRING, "")
         return string.replace("\n", "")
 
-    @mock.patch("input_parser.parse_input")
+    @mock.patch("input_parser.parse_input_with_printable_name")
     @patch("input_parser.parse_challenge_selection")
     def test_main_for_predict_outcome_challenge(
         self, mock_selection, mock_input_for_predict_outcome
     ):
+        """
+        Test full flow of predict outcome challenge.
+        """
         mock_selection.return_value = (
             ChallengeSelectionChoices.PREDICT_OUTCOME_CHALLENGE
         )
@@ -63,11 +66,14 @@ class TestMainFlow(unittest.TestCase):
             else:
                 self.assertEqual(string, f"{number} runs")
 
-    @mock.patch("input_parser.parse_input")
+    @mock.patch("input_parser.parse_input_with_printable_name")
     @patch("input_parser.parse_challenge_selection")
     def test_main_for_predict_outcome_challenge_with_comments(
         self, mock_selection, mock_input_for_predict_outcome
     ):
+        """
+        Test full flow of predict outcome with comment challenge.
+        """
         mock_selection.return_value = (
             ChallengeSelectionChoices.PREDICT_OUTCOME_CHALLENGE_WITH_COMMENTS
         )
@@ -82,6 +88,9 @@ class TestMainFlow(unittest.TestCase):
             self.assertEqual(string, f"{comment} - {number} {outcome}")
 
     def test_super_over_challenge_output_for_each_ball(self):
+        """
+        Test output of a ball in super over challenge.
+        """
         with patch("sys.stdout", new=StringIO()) as output:
             wickets_taken = 0
             OutputParser.print_bowling_details("Bouncer")
@@ -108,6 +117,10 @@ class TestMainFlow(unittest.TestCase):
         mock_result_of_current_bowl,
         mock_comment,
     ):
+        """
+        Test full flow of super over challenge
+        where the batsmen plays 6 balls.
+        """
         mock_selection.return_value = ChallengeSelectionChoices.SUPER_OVER_CHALLENGE
         mock_input_for_super_over.side_effect = SuperOverConstants.INPUT_SIDE_EFFECTS
         mock_bowl.side_effect = SuperOverConstants.BOWL_SIDE_EFFECTS
@@ -137,6 +150,10 @@ class TestMainFlow(unittest.TestCase):
         mock_result_of_current_bowl,
         mock_comment,
     ):
+        """
+        Test full flow of super over challenge
+        where the batsmen will play 2 balls and lose the match.
+        """
         mock_selection.return_value = ChallengeSelectionChoices.SUPER_OVER_CHALLENGE
         mock_input_for_super_over.side_effect = (
             SuperOverTwoWicketsConstants.INPUT_SIDE_EFFECTS
@@ -168,6 +185,10 @@ class TestMainFlow(unittest.TestCase):
         mock_result_of_current_bowl,
         mock_comment,
     ):
+        """
+        Test full flow of super over challenge
+        where the batsmen will play 3 balls and win the match.
+        """
         mock_selection.return_value = ChallengeSelectionChoices.SUPER_OVER_CHALLENGE
         mock_input_for_super_over.side_effect = (
             SuperOverThreeBallsVictoryConstants.INPUT_SIDE_EFFECTS
@@ -189,6 +210,9 @@ class TestMainFlow(unittest.TestCase):
             )
 
     def test_super_over_challenge_output_for_won_output(self):
+        """
+        Test won output in super over challenge.
+        """
         with patch("sys.stdout", new=StringIO()) as output:
             OutputParser.print_super_over_won_output(12, 1)
             string = self.remove_intro_string(output)
@@ -198,6 +222,9 @@ class TestMainFlow(unittest.TestCase):
             )
 
     def test_super_over_challenge_output_for_lost_output(self):
+        """
+        Test lost output in super over challenge.
+        """
         with patch("sys.stdout", new=StringIO()) as output:
             OutputParser.print_super_over_lost_output(9)
             string = self.remove_intro_string(output)

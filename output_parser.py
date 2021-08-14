@@ -27,6 +27,27 @@ def wicket_string(wickets_count):
     return f"{wickets_count} wickets"
 
 
+def print_output_for_outcome_with_comment(comment, result):
+    print(f"{comment} - {result_string(result)}")
+
+
+def print_output_for_a_bowl_in_super_over(
+    wickets_taken, played_shot, played_timing, bowl_outcome, bowl, comment
+):
+    print_bowling_details(bowl)
+    print_batting_details(wickets_taken, played_shot["name"], played_timing["name"])
+    print_output_for_outcome_with_comment(comment, bowl_outcome)
+
+
+def print_bowling_details(bowl):
+    print(f"{Setting.BOWLER_NAME} bowled {bowl} ball,")
+
+
+def print_batting_details(wickets_taken, played_shot, played_timing):
+    current_batsman = Setting.BATSMEN_NAMES[wickets_taken]
+    print(f"{current_batsman} played {played_timing} {played_shot} shot")
+
+
 def print_super_over_won_output(score, wickets_taken):
     balance_wickets = Setting.MAXIMUM_WICKETS - wickets_taken
     print(score_string(score))
@@ -49,24 +70,3 @@ def print_super_over_lost_output(score):
 
 def lost_string(score):
     return f"{Setting.COUNTRY_NAME} lost by {result_string(score)}"
-
-
-def print_output_for_outcome_with_comment(comment, result):
-    print(f"{comment} - {result_string(result)}")
-
-
-def print_batting_details(wickets_taken, played_shot, played_timing):
-    current_batsman = Setting.BATSMEN_NAMES[wickets_taken]
-    print(f"{current_batsman} played {played_timing} {played_shot} shot")
-
-
-def print_bowling_details(bowl):
-    print(f"{Setting.BOWLER_NAME} bowled {bowl} ball,")
-
-
-def print_output_for_a_bowl_in_super_over(
-    wickets_taken, played_shot, played_timing, bowl_outcome, bowl, comment
-):
-    print_bowling_details(bowl)
-    print_batting_details(wickets_taken, played_shot["name"], played_timing["name"])
-    print_output_for_outcome_with_comment(comment, bowl_outcome)

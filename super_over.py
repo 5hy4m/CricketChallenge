@@ -62,7 +62,7 @@ class PredictSuperOver(Prediction):
         return outcome == "wicket"
 
     def process_commentry_for_current_ball(self):
-        bowl = self.predict_bowl_type_using_shot_type(self.played_shot["key"])
+        bowl = self.predict_bowl_type_using_shot_type()
         comment = self.predict_comment_using_bowl_outcome(self.bowl_outcome)
         OutputParser.print_bowling_details(bowl)
         OutputParser.print_batting_details(
