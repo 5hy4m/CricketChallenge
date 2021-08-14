@@ -10,7 +10,7 @@
             "probable_bowl": [
                 "Bouncer",
                 "Inswinger",
-                "Slower Ball",
+                "Slower",
                 "Yorker",
                 "Pace"
             ]
@@ -19,7 +19,7 @@
             "probable_bowl": [
                 "Inswinger",
                 "Leg Cutter",
-                "Slower Ball"
+                "Slower"
             ]
         },
         "FLICK": {
@@ -37,7 +37,7 @@
                 "Outswinger",
                 "Off Cutter",
                 "Pace",
-                "Slower Ball"
+                "Slower"
             ]
         },
         "LEGGLANCE": {
@@ -45,7 +45,7 @@
                 "Inswinger",
                 "Leg Cutter",
                 "Pace",
-                "Slower Ball",
+                "Slower",
                 "Doosra"
             ]
         },
@@ -53,7 +53,7 @@
             "probable_bowl": [
                 "Bouncer",
                 "Doosra",
-                "Slower Ball"
+                "Slower"
             ]
         },
         "LONGON": {
@@ -61,7 +61,7 @@
                 "Yorker",
                 "Inswinger",
                 "Leg Cutter",
-                "Slower Ball",
+                "Slower",
                 "Pace"
             ]
         },
@@ -70,7 +70,7 @@
                 "Yorker",
                 "Outswinger",
                 "Off Cutter",
-                "Slower Ball",
+                "Slower",
                 "Pace"
             ]
         },
@@ -78,7 +78,7 @@
             "probable_bowl": [
                 "Inswinger",
                 "Leg Cutter",
-                "Slower Ball"
+                "Slower"
             ]
         },
         "SQUARECUT": {
@@ -88,7 +88,7 @@
                 "Off Cutter",
                 "Outswinger",
                 "Off Break",
-                "Slower Ball",
+                "Slower",
                 "Pace"
             ]
         },

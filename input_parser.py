@@ -1,5 +1,5 @@
 import json
-from error_constants import CHALLENGE_SELECTION_PARSE_ERROR
+from error_messages_and_handlers import challenge_selection_value_error_handler
 
 
 def read_outcome_chart():
@@ -21,8 +21,6 @@ def split_input_as_array():
     return input().split(" ")
 
 
+@challenge_selection_value_error_handler
 def parse_challenge_selection():
-    try:
-        return int(input())
-    except ValueError:
-        raise ValueError(CHALLENGE_SELECTION_PARSE_ERROR)
+    return int(input())

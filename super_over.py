@@ -1,7 +1,7 @@
 import random
 import output_parser as OutputParser
 from prediction import Prediction
-from error_constants import SUPER_OVER_PARSE_ERROR
+from error_messages_and_handlers import super_over_value_error_handler
 from match_settings import Setting
 
 
@@ -41,14 +41,12 @@ class PredictSuperOver(Prediction):
     def is_all_out(self):
         return self.wickets_taken >= Setting.MAXIMUM_WICKETS
 
+    @super_over_value_error_handler
     def set_shot_and_timing_values_from_input(self):
-        try:
-            (
-                self.played_shot,
-                self.played_timing,
-            ) = self.parser.parse_input_with_printable_name()
-        except ValueError:
-            raise ValueError(SUPER_OVER_PARSE_ERROR)
+        (
+            self.played_shot,
+            self.played_timing,
+        ) = self.parser.parse_input_with_printable_name()
 
     def prepare_for_next_bowl(self):
         self.remaining_balls -= 1

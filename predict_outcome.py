@@ -1,19 +1,17 @@
 import output_parser as OutputParser
 from prediction import Prediction
-from error_constants import PREDICT_OUTCOME_PARSE_ERROR
+from error_messages_and_handlers import predict_outcome_value_error_handler
 
 
 class PredictOutcome(Prediction):
+    @predict_outcome_value_error_handler
     def __init__(self):
         super().__init__()
-        try:
-            (
-                self.bowl,
-                self.played_shot,
-                self.played_timing,
-            ) = self.parser.parse_input_with_printable_name()
-        except ValueError:
-            raise ValueError(PREDICT_OUTCOME_PARSE_ERROR)
+        (
+            self.bowl,
+            self.played_shot,
+            self.played_timing,
+        ) = self.parser.parse_input_with_printable_name()
 
     def predict(self):
         bowl_outcome = self.predict_outcome_using_shot_timing()

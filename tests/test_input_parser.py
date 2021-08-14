@@ -103,7 +103,7 @@ class TestInputParser(unittest.TestCase):
     @mock.patch("builtins.input")
     def test_errors_of_super_over_input_parser(self, mock_input):
         """
-        Check KeyError in super_over_input_parser
+        Check ValueError in super_over_input_parser
         when insufficient input is provided.
         """
         with self.assertRaises(ValueError):

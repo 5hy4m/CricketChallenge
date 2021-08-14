@@ -3,6 +3,7 @@ import input_parser as InputParser
 from constants import ChallengeSelectionChoices
 from predict_outcome import PredictOutcome
 from super_over import PredictSuperOver
+from error_messages_and_handlers import CHALLENGE_SELECTION_PARSE_ERROR_MESSAGE
 
 
 def main():
@@ -15,7 +16,7 @@ def main():
     elif selection == ChallengeSelectionChoices.SUPER_OVER_CHALLENGE:
         PredictSuperOver().start_second_innings()
     else:
-        raise ValueError(selection)
+        raise ValueError(CHALLENGE_SELECTION_PARSE_ERROR_MESSAGE)
 
 
 if __name__ == "__main__":
