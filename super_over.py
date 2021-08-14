@@ -64,11 +64,6 @@ class PredictSuperOver(Prediction):
         comment = self.predict_comment_using_bowl_outcome(self.bowl_outcome)
         OutputParser.print_bowling_details(bowl)
         OutputParser.print_batting_details(
-            self.wickets_taken,
-            self.played_shot["name"],
-            self.played_timing["name"],
+            self.wickets_taken, self.played_shot["name"], self.played_timing["name"]
         )
-        OutputParser.print_output_for_outcome_with_comment(
-            comment,
-            self.bowl_outcome,
-        )
+        OutputParser.print_output_for_outcome_with_comment(comment, self.bowl_outcome)
