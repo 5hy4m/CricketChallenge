@@ -15,7 +15,7 @@ from constants import (
     INTRO_STRING,
 )
 from match_settings import Setting
-from input_parser import InputParser
+import input_parser as InputParser
 from tests.test_constants import (
     PredictOutComeConstants,
     SuperOverConstants,
@@ -37,14 +37,14 @@ class TestMainFlow(unittest.TestCase):
             self.batting_cards,
             self.shot_timings,
             self.runs,
-        ) = InputParser().read_outcome_chart()
+        ) = InputParser.read_outcome_chart()
 
     def remove_intro_string(self, output):
         string = output.getvalue().replace(INTRO_STRING, "")
         return string.replace("\n", "")
 
-    @mock.patch("input_parser.InputParser.parse_input")
-    @patch("input_parser.InputParser.parse_challenge_selection")
+    @mock.patch("input_parser.parse_input")
+    @patch("input_parser.parse_challenge_selection")
     def test_main_for_predict_outcome_challenge(
         self, mock_selection, mock_input_for_predict_outcome
     ):
@@ -63,8 +63,8 @@ class TestMainFlow(unittest.TestCase):
             else:
                 self.assertEqual(string, f"{number} runs")
 
-    @mock.patch("input_parser.InputParser.parse_input")
-    @patch("input_parser.InputParser.parse_challenge_selection")
+    @mock.patch("input_parser.parse_input")
+    @patch("input_parser.parse_challenge_selection")
     def test_main_for_predict_outcome_challenge_with_comments(
         self, mock_selection, mock_input_for_predict_outcome
     ):
@@ -98,8 +98,8 @@ class TestMainFlow(unittest.TestCase):
     @patch("prediction.Prediction.predict_comment_using_bowl_outcome")
     @patch("prediction.Prediction.predict_outcome_using_shot_timing")
     @patch("super_over.PredictSuperOver.predict_bowl_type_using_shot_type")
-    @patch("input_parser.InputParser.parse_input_with_printable_name")
-    @patch("input_parser.InputParser.parse_challenge_selection")
+    @patch("input_parser.parse_input_with_printable_name")
+    @patch("input_parser.parse_challenge_selection")
     def test_super_over_challenge_flow(
         self,
         mock_selection,
@@ -127,8 +127,8 @@ class TestMainFlow(unittest.TestCase):
     @patch("prediction.Prediction.predict_comment_using_bowl_outcome")
     @patch("prediction.Prediction.predict_outcome_using_shot_timing")
     @patch("super_over.PredictSuperOver.predict_bowl_type_using_shot_type")
-    @patch("input_parser.InputParser.parse_input_with_printable_name")
-    @patch("input_parser.InputParser.parse_challenge_selection")
+    @patch("input_parser.parse_input_with_printable_name")
+    @patch("input_parser.parse_challenge_selection")
     def test_super_over_challenge_flow_after_two_wickets(
         self,
         mock_selection,
@@ -158,8 +158,8 @@ class TestMainFlow(unittest.TestCase):
     @patch("prediction.Prediction.predict_comment_using_bowl_outcome")
     @patch("prediction.Prediction.predict_outcome_using_shot_timing")
     @patch("super_over.PredictSuperOver.predict_bowl_type_using_shot_type")
-    @patch("input_parser.InputParser.parse_input_with_printable_name")
-    @patch("input_parser.InputParser.parse_challenge_selection")
+    @patch("input_parser.parse_input_with_printable_name")
+    @patch("input_parser.parse_challenge_selection")
     def test_super_over_challenge_flow_with_three_balls_victory(
         self,
         mock_selection,

@@ -1,11 +1,11 @@
 import random
-from input_parser import InputParser
+import input_parser as InputParser
 from output_parser import OutputParser
 
 
 class Prediction:
     def __init__(self):
-        self.parser = InputParser()
+        self.parser = InputParser
         (
             self.batting_cards,
             self.shot_timings,

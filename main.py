@@ -1,5 +1,5 @@
 from constants import INTRO_STRING
-from input_parser import InputParser
+import input_parser as InputParser
 from constants import ChallengeSelectionChoices
 from predict_outcome import PredictOutcome
 from super_over import PredictSuperOver

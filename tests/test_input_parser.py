@@ -9,7 +9,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 
 from constants import ChallengeSelectionChoices
-from input_parser import InputParser
+import input_parser as InputParser
 from tests.test_constants import PredictOutComeConstants, SuperOverConstants
 from super_over import PredictSuperOver
 from predict_outcome import PredictOutcome
@@ -17,7 +17,7 @@ from predict_outcome import PredictOutcome
 
 class TestInputParser(unittest.TestCase):
     def setUp(self):
-        self.parser = InputParser()
+        self.parser = InputParser
 
     @mock.patch("builtins.input")
     def test_challenge_selection_parser(self, mock_input):
