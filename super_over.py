@@ -1,5 +1,5 @@
 import random
-from output_parser import OutputParser
+import output_parser as OutputParser
 from prediction import Prediction
 from error_constants import SUPER_OVER_PARSE_ERROR
 from match_settings import Setting
@@ -57,6 +57,10 @@ class PredictSuperOver(Prediction):
         else:
             self.score += self.bowl_outcome
 
+    @staticmethod
+    def is_wicket(outcome):
+        return outcome == "wicket"
+
     def process_commentry_for_current_ball(self):
         bowl = self.predict_bowl_type_using_shot_type(self.played_shot["key"])
         comment = self.predict_comment_using_bowl_outcome(self.bowl_outcome)
@@ -70,7 +74,3 @@ class PredictSuperOver(Prediction):
             comment,
             self.bowl_outcome,
         )
-
-    @staticmethod
-    def is_wicket(outcome):
-        return outcome == "wicket"

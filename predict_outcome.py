@@ -1,4 +1,4 @@
-from output_parser import OutputParser
+import output_parser as OutputParser
 from prediction import Prediction
 from error_constants import PREDICT_OUTCOME_PARSE_ERROR
 

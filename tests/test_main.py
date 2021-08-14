@@ -23,7 +23,7 @@ from tests.test_constants import (
     SuperOverThreeBallsVictoryConstants,
 )
 from main import main
-from output_parser import OutputParser
+import output_parser as OutputParser
 
 
 @patch("match_settings.Setting.BATSMEN_NAMES", ["Craig", "Paul"])

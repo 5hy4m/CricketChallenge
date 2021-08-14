@@ -1,6 +1,6 @@
 import random
 import input_parser as InputParser
-from output_parser import OutputParser
+import output_parser as OutputParser
 
 
 class Prediction:

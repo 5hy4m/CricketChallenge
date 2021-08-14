@@ -1,76 +1,72 @@
 from match_settings import Setting
 
 
-class OutputParser:
-    @classmethod
-    def print_output_for_predict_outcome(cls, result):
-        print(cls.result_string(result))
+def print_output_for_predict_outcome(result):
+    print(result_string(result))
 
-    @classmethod
-    def result_string(cls, result):
-        if cls.is_integer(result):
-            return cls.run_string(result)
-        return cls.wicket_string(1)
 
-    @staticmethod
-    def is_integer(result):
-        return type(result) == int
+def result_string(result):
+    if is_integer(result):
+        return run_string(result)
+    return wicket_string(1)
 
-    @staticmethod
-    def run_string(run_count):
-        if run_count == 0 or run_count == 1:
-            return f"{run_count} run"
-        return f"{run_count} runs"
 
-    @staticmethod
-    def wicket_string(wickets_count):
-        if wickets_count == 0 or wickets_count == 1:
-            return f"{wickets_count} wicket"
-        return f"{wickets_count} wickets"
+def is_integer(result):
+    return type(result) == int
 
-    @classmethod
-    def print_super_over_won_output(cls, score, wickets_taken):
-        balance_wickets = Setting.MAXIMUM_WICKETS - wickets_taken
-        print(cls.score_string(score))
-        print(cls.won_string(balance_wickets))
 
-    @classmethod
-    def score_string(cls, result):
-        return f"{Setting.COUNTRY_NAME} scored: {cls.result_string(result)}"
+def run_string(run_count):
+    if run_count == 0 or run_count == 1:
+        return f"{run_count} run"
+    return f"{run_count} runs"
 
-    @classmethod
-    def won_string(cls, wickets_count):
-        return f"{Setting.COUNTRY_NAME} won by {cls.wicket_string(wickets_count)}"
 
-    @classmethod
-    def print_super_over_lost_output(cls, score):
-        lost_by = Setting.TARGET - score
-        print(cls.score_string(score))
-        print(cls.lost_string(lost_by))
+def wicket_string(wickets_count):
+    if wickets_count == 0 or wickets_count == 1:
+        return f"{wickets_count} wicket"
+    return f"{wickets_count} wickets"
 
-    @classmethod
-    def lost_string(cls, score):
-        return f"{Setting.COUNTRY_NAME} lost by {cls.result_string(score)}"
 
-    @classmethod
-    def print_output_for_outcome_with_comment(cls, comment, result):
-        print(f"{comment} - {cls.result_string(result)}")
+def print_super_over_won_output(score, wickets_taken):
+    balance_wickets = Setting.MAXIMUM_WICKETS - wickets_taken
+    print(score_string(score))
+    print(won_string(balance_wickets))
 
-    @classmethod
-    def print_batting_details(cls, wickets_taken, played_shot, played_timing):
-        current_batsman = Setting.BATSMEN_NAMES[wickets_taken]
-        print(f"{current_batsman} played {played_timing} {played_shot} shot")
 
-    @staticmethod
-    def print_bowling_details(bowl):
-        print(f"{Setting.BOWLER_NAME} bowled {bowl} ball,")
+def score_string(result):
+    return f"{Setting.COUNTRY_NAME} scored: {result_string(result)}"
 
-    @classmethod
-    def print_output_for_a_bowl_in_super_over(
-        cls, wickets_taken, played_shot, played_timing, bowl_outcome, bowl, comment
-    ):
-        cls.print_bowling_details(bowl)
-        cls.print_batting_details(
-            wickets_taken, played_shot["name"], played_timing["name"]
-        )
-        cls.print_output_for_outcome_with_comment(comment, bowl_outcome)
+
+def won_string(wickets_count):
+    return f"{Setting.COUNTRY_NAME} won by {wicket_string(wickets_count)}"
+
+
+def print_super_over_lost_output(score):
+    lost_by = Setting.TARGET - score
+    print(score_string(score))
+    print(lost_string(lost_by))
+
+
+def lost_string(score):
+    return f"{Setting.COUNTRY_NAME} lost by {result_string(score)}"
+
+
+def print_output_for_outcome_with_comment(comment, result):
+    print(f"{comment} - {result_string(result)}")
+
+
+def print_batting_details(wickets_taken, played_shot, played_timing):
+    current_batsman = Setting.BATSMEN_NAMES[wickets_taken]
+    print(f"{current_batsman} played {played_timing} {played_shot} shot")
+
+
+def print_bowling_details(bowl):
+    print(f"{Setting.BOWLER_NAME} bowled {bowl} ball,")
+
+
+def print_output_for_a_bowl_in_super_over(
+    wickets_taken, played_shot, played_timing, bowl_outcome, bowl, comment
+):
+    print_bowling_details(bowl)
+    print_batting_details(wickets_taken, played_shot["name"], played_timing["name"])
+    print_output_for_outcome_with_comment(comment, bowl_outcome)
